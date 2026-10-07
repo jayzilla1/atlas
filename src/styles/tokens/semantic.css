@@ -1,0 +1,169 @@
+/* ==========================================================================
+   LAYER 2 — SEMANTIC TOKENS
+   Meaning, not appearance. "action-primary" not "blue". Themes remap here only.
+   Contrast notes (WCAG 2.2): all text/background pairs below are ≥ 4.5:1,
+   UI boundaries ≥ 3:1.
+   ========================================================================== */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --color-bg-canvas: var(--slate-50);
+  --color-bg-surface: var(--slate-0);
+  --color-bg-elevated: var(--slate-0);
+  --color-bg-sunken: var(--slate-100);
+  --color-bg-hover: var(--slate-50);
+  --color-bg-selected: var(--blue-50);
+  --color-bg-overlay: rgb(16 24 40 / 0.5);
+
+  /* Borders */
+  --color-border-subtle: var(--slate-100);
+  --color-border-default: var(--slate-200);
+  --color-border-strong: var(--slate-400); /* 3:1 on white — used for inputs/controls */
+
+  /* Text */
+  --color-text-primary: var(--slate-900);
+  --color-text-secondary: var(--slate-600);
+  --color-text-tertiary: var(--slate-500);
+  --color-text-inverse: var(--slate-0);
+  --color-text-link: var(--blue-600);
+
+  /* Brand / action */
+  --color-action-primary: var(--blue-600);
+  --color-action-primary-hover: var(--blue-700);
+  --color-action-primary-pressed: var(--blue-800);
+  --color-action-primary-subtle: var(--blue-50);
+  --color-action-primary-contrast: var(--slate-0);
+  --color-action-ink: var(--blue-600); /* blue text on the subtle tint */
+  --color-focus-ring: var(--blue-500);
+
+  /* AI (teal family) */
+  --color-ai-accent: var(--teal-600);
+  --color-ai-subtle: var(--teal-50);
+  --color-ai-border: var(--teal-200);
+  --color-ai-text: var(--teal-700);
+
+  /* Status families: bg / fg(text) / border / solid(icon, bars) */
+  --color-critical-bg: var(--red-50);
+  --color-critical-fg: var(--red-600);
+  --color-critical-border: var(--red-200);
+  --color-critical-solid: var(--red-500);
+
+  --color-high-bg: var(--orange-50);
+  --color-high-fg: var(--orange-600);
+  --color-high-border: var(--orange-200);
+  --color-high-solid: var(--orange-500);
+
+  --color-warning-bg: var(--amber-50);
+  --color-warning-fg: var(--amber-600);
+  --color-warning-border: var(--amber-200);
+  --color-warning-solid: var(--amber-500);
+
+  --color-success-bg: var(--green-50);
+  --color-success-fg: var(--green-600);
+  --color-success-border: var(--green-200);
+  --color-success-solid: var(--green-500);
+
+  --color-info-bg: var(--sky-50);
+  --color-info-fg: var(--sky-600);
+  --color-info-border: var(--sky-200);
+  --color-info-solid: var(--sky-500);
+
+  --color-neutral-bg: var(--slate-100);
+  --color-neutral-fg: var(--slate-700);
+  --color-neutral-border: var(--slate-200);
+  --color-neutral-solid: var(--slate-400);
+
+  /* Data visualisation (categorical, colour-blind-considerate order) */
+  --color-chart-1: var(--blue-600);
+  --color-chart-2: var(--teal-500);
+  --color-chart-3: var(--amber-500);
+  --color-chart-4: var(--slate-400);
+  --color-chart-grid: var(--slate-200);
+  --color-chart-axis: var(--slate-500);
+
+  /* Elevation */
+  --shadow-xs: 0 1px 2px rgb(16 24 40 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(16 24 40 / 0.08), 0 1px 2px rgb(16 24 40 / 0.04);
+  --shadow-md: 0 4px 10px -2px rgb(16 24 40 / 0.09), 0 2px 4px -2px rgb(16 24 40 / 0.05);
+  --shadow-lg: 0 16px 32px -8px rgb(16 24 40 / 0.16), 0 6px 12px -6px rgb(16 24 40 / 0.08);
+  --shadow-focus: 0 0 0 2px var(--color-bg-surface), 0 0 0 4px var(--color-focus-ring);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg-canvas: #090e1a;
+  --color-bg-surface: #0f1626;
+  --color-bg-elevated: #151e33;
+  --color-bg-sunken: #0b1220;
+  --color-bg-hover: #141d31;
+  --color-bg-selected: #16254a;
+  --color-bg-overlay: rgb(2 6 16 / 0.7);
+
+  --color-border-subtle: #1a2338;
+  --color-border-default: #243049;
+  --color-border-strong: #5b6882;
+
+  --color-text-primary: #eef1f6;
+  --color-text-secondary: #a8b2c4;
+  --color-text-tertiary: #8b96ab;
+  --color-text-inverse: #0a0f1c;
+  --color-text-link: var(--blue-300);
+
+  --color-action-primary: var(--blue-500);
+  --color-action-primary-hover: var(--blue-600);
+  --color-action-primary-pressed: var(--blue-700);
+  --color-action-primary-subtle: #16254a;
+  --color-action-primary-contrast: #ffffff;
+  --color-action-ink: var(--blue-300);
+  --color-focus-ring: var(--blue-300);
+
+  --color-ai-accent: var(--teal-400);
+  --color-ai-subtle: #0c2429;
+  --color-ai-border: #14454c;
+  --color-ai-text: var(--teal-200);
+
+  --color-critical-bg: #2c1512;
+  --color-critical-fg: var(--red-300);
+  --color-critical-border: #5a2520;
+  --color-critical-solid: #f04438;
+
+  --color-high-bg: #2e1a0f;
+  --color-high-fg: var(--orange-300);
+  --color-high-border: #5b3217;
+  --color-high-solid: #f38744;
+
+  --color-warning-bg: #2b2109;
+  --color-warning-fg: var(--amber-300);
+  --color-warning-border: #55400f;
+  --color-warning-solid: #f5a524;
+
+  --color-success-bg: #0d2619;
+  --color-success-fg: var(--green-300);
+  --color-success-border: #1a4a32;
+  --color-success-solid: #32d583;
+
+  --color-info-bg: #0f2036;
+  --color-info-fg: var(--sky-300);
+  --color-info-border: #1c3d63;
+  --color-info-solid: #53b1fd;
+
+  --color-neutral-bg: #1a2338;
+  --color-neutral-fg: #c3cbda;
+  --color-neutral-border: #2a3650;
+  --color-neutral-solid: #6b7790;
+
+  --color-chart-1: var(--blue-400);
+  --color-chart-2: var(--teal-400);
+  --color-chart-3: var(--amber-300);
+  --color-chart-4: #6b7790;
+  --color-chart-grid: #243049;
+  --color-chart-axis: #8b96ab;
+
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 6px 14px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 18px 36px -8px rgb(0 0 0 / 0.6);
+}

@@ -1,0 +1,84 @@
+@import '@fontsource-variable/inter';
+@import './tokens/primitives.css';
+@import './tokens/semantic.css';
+@import './tokens/component.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-family-sans);
+    font-feature-settings: 'cv11', 'ss03', 'tnum' 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-canvas text-ink text-body;
+    margin: 0;
+  }
+  h1, h2, h3, h4 { @apply text-ink; margin: 0; }
+  p { margin: 0; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  a { color: inherit; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* One focus style for the whole product — 2px ring with a surface gap so it stays visible on any background */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+    border-radius: var(--radius-sm);
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  ::selection { background: var(--blue-200); color: var(--slate-900); }
+
+  /* Reduced motion: keep state changes, drop movement */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply absolute left-4 top-2 z-[100] -translate-y-20 rounded-md bg-action px-4 py-2 text-action-on shadow-md;
+  }
+  .skip-link:focus { transform: translateY(0); }
+  .sr-only-live { @apply sr-only; }
+  .scroll-thin { scrollbar-width: thin; scrollbar-color: var(--color-border-strong) transparent; }
+}
+
+@layer utilities {
+  .animate-fade-in { animation: fade-in var(--motion-duration-base) var(--motion-ease-standard) both; }
+  .animate-rise { animation: rise var(--motion-duration-slow) var(--motion-ease-standard) both; }
+  .animate-slide-in-right { animation: slide-in-right var(--motion-duration-slow) var(--motion-ease-standard) both; }
+  .animate-slide-up { animation: slide-up var(--motion-duration-slow) var(--motion-ease-standard) both; }
+  .animate-pop { animation: pop var(--motion-duration-base) var(--motion-ease-emphasized) both; }
+  .animate-shimmer {
+    background: linear-gradient(90deg, var(--color-bg-sunken) 0%, var(--color-border-subtle) 50%, var(--color-bg-sunken) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+  .animate-blink { animation: blink 1s steps(2, start) infinite; }
+  .animate-pulse-soft { animation: pulse-soft 1.6s ease-in-out infinite; }
+}
+
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes rise { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+@keyframes slide-in-right { from { transform: translateX(24px); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes slide-up { from { transform: translateY(24px); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes pop { from { transform: scale(0.96); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes shimmer { from { background-position: 200% 0 } to { background-position: -200% 0 } }
+@keyframes blink { to { visibility: hidden } }
+@keyframes pulse-soft { 0%, 100% { opacity: 1 } 50% { opacity: 0.45 } }
+
+/* Portfolio / inspect mode */
+[data-inspect='on'] [data-ds] { cursor: help; }
+[data-inspect='on'] [data-ds]:hover { outline: 1.5px dashed #e11d90; outline-offset: 2px; }
