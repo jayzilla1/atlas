@@ -10,13 +10,13 @@ import { cn } from '@/utils/cn'
  */
 export type Tone = 'critical' | 'high' | 'warning' | 'success' | 'info' | 'neutral' | 'ai'
 const toneClass: Record<Tone, string> = {
-  critical: 'bg-critical-bg text-critical-fg border-critical-border',
-  high: 'bg-high-bg text-high-fg border-high-border',
-  warning: 'bg-warning-bg text-warning-fg border-warning-border',
-  success: 'bg-success-bg text-success-fg border-success-border',
-  info: 'bg-info-bg text-info-fg border-info-border',
-  neutral: 'bg-neutral-bg text-neutral-fg border-neutral-border',
-  ai: 'bg-ai-subtle text-ai-ink border-ai-border',
+  critical: 'bg-critical-bg text-critical-fg border-transparent',
+  high: 'bg-high-bg text-high-fg border-transparent',
+  warning: 'bg-warning-bg text-warning-fg border-transparent',
+  success: 'bg-success-bg text-success-fg border-transparent',
+  info: 'bg-info-bg text-info-fg border-transparent',
+  neutral: 'bg-neutral-bg text-neutral-fg border-transparent',
+  ai: 'bg-ai-subtle text-ai-ink border-transparent',
 }
 export const toneSolid: Record<Tone, string> = {
   critical: 'bg-critical-solid', high: 'bg-high-solid', warning: 'bg-warning-solid', success: 'bg-success-solid', info: 'bg-info-solid', neutral: 'bg-neutral-solid', ai: 'bg-ai',
@@ -29,7 +29,7 @@ export { toneClass }
 export function Badge({ tone = 'neutral', icon, children, className, size = 'md' }: { tone?: Tone; icon?: ReactNode; children: ReactNode; className?: string; size?: 'sm' | 'md' }) {
   return (
     <span data-ds="Badge" data-ds-variant={tone}
-      className={cn('inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-sm border font-medium', size === 'md' ? 'h-6 px-2 text-caption' : 'h-5 px-1.5 text-[0.6875rem]', toneClass[tone], className)}>
+      className={cn('inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border font-semibold', size === 'md' ? 'h-6 px-2.5 text-caption' : 'h-5 px-2 text-[0.6875rem]', toneClass[tone], className)}>
       {icon && <span className="flex shrink-0 [&>svg]:h-3.5 [&>svg]:w-3.5" aria-hidden>{icon}</span>}
       {children}
     </span>

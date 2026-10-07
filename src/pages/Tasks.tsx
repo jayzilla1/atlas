@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
-import { CheckCircle2, ChevronDown, MoreHorizontal, Plus, UserPlus, PartyPopper } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ShieldAlert, CheckCircle2, ChevronDown, MoreHorizontal, Plus, UserPlus, PartyPopper } from 'lucide-react'
 import { PageHeader } from '@/components/ui/Page'
 import { Card } from '@/components/ui/Card'
 import { DataTable, type Column } from '@/components/ui/DataTable'
@@ -63,7 +64,7 @@ export function TasksPage() {
         <Checkbox className="mt-0.5" label={<span className="sr-only">{t.status === 'completed' ? 'Reopen' : 'Complete'} “{t.name}”</span>} checked={t.status === 'completed'} disabled={!perm.allowed}
           onChange={() => (t.status === 'completed' ? s.updateTask(t.id, { status: 'in_progress', completedAt: undefined }) : complete(t))} />
         <div className="min-w-0"><p className={cn('font-medium', t.status === 'completed' && 'text-ink-tertiary line-through')}>{t.name}</p>
-          <p className="mt-0.5 flex items-center gap-1.5 text-caption text-ink-secondary">{t.id}{t.createdBy === 'ai' && <Badge tone="ai" size="sm" icon={<Sparkles />}>Created by Atlas AI</Badge>}</p></div>
+          <p className="mt-0.5 flex flex-wrap items-center gap-1.5 text-caption text-ink-secondary"><span className="whitespace-nowrap">{t.id}</span>{t.createdBy === 'ai' && <Badge tone="ai" size="sm" icon={<Sparkles />}>Created by Atlas AI</Badge>}</p></div>
       </div>) },
     { id: 'owner', header: 'Owner', hideBelow: 'lg', sortValue: (t) => s.personById(t.ownerId)?.name ?? '', cell: (t) => <PersonLink id={t.ownerId} /> },
     { id: 'priority', header: 'Priority', sortValue: (t) => PRIORITY_RANK[t.priority], cell: (t) => <PriorityBadge priority={t.priority} /> },
@@ -72,7 +73,7 @@ export function TasksPage() {
         items={STATUSES.map((st) => ({ id: st, label: STATUS[st].label, checked: t.status === st, disabled: !perm.allowed, onSelect: () => (st === 'completed' ? complete(t) : s.updateTask(t.id, { status: st, completedAt: undefined })) }))}
         trigger={(p) => <button {...p} disabled={!perm.allowed} aria-label={`Status: ${STATUS[t.status].label}. Change status`} className="group inline-flex items-center gap-1 rounded-sm disabled:cursor-not-allowed"><StatusBadge status={t.status} /><ChevronDown className="h-3.5 w-3.5 text-ink-tertiary group-hover:text-ink group-disabled:hidden" aria-hidden /></button>} />) },
     { id: 'due', header: 'Due', sortValue: (t) => t.dueDate, cell: (t) => { const d = dueLabel(t.dueDate); const done = t.status === 'completed'; return <span className={cn('whitespace-nowrap text-body-sm tabular-nums', !done && d.overdue ? 'font-semibold text-critical-fg' : !done && d.soon ? 'font-medium text-warning-fg' : 'text-ink-secondary')}>{done ? `Done ${formatDate(t.completedAt)}` : d.text}</span> } },
-    { id: 'related', header: 'Related', hideBelow: 'xl', cell: (t) => <div className="flex flex-wrap gap-1.5">{t.riskId && <EntityChip entity={{ type: 'risk', id: t.riskId }} className="max-w-[9rem]" />}{!t.riskId && !t.entity && <span className="text-ink-tertiary">—</span>}</div> },
+    { id: 'related', header: 'Related', hideBelow: 'xl', cell: (t) => t.riskId ? <Link to={`/risks/${t.riskId}`} className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line px-2.5 py-1 text-caption font-semibold text-ink-secondary hover:bg-hover hover:text-ink"><ShieldAlert className="h-3.5 w-3.5" aria-hidden />{t.riskId}</Link> : <span className="text-ink-tertiary">—</span> },
     { id: 'actions', header: 'Actions', mobile: 'hide', align: 'right', cell: (t) => (
       <Dropdown label={`Actions for ${t.name}`} items={[
         { id: 'assign', label: 'Assign…', icon: <UserPlus className="h-4 w-4" />, disabled: !perm.allowed, disabledReason: perm.reason, onSelect: () => { setAssigning(t); setAssignee(t.ownerId) } },
@@ -92,14 +93,14 @@ export function TasksPage() {
           <Tabs label="Task view" value={f.values.view} onChange={(v) => f.set('view', v)} tabs={[{ id: 'open', label: 'Open', count: counts.open }, { id: 'completed', label: 'Completed', count: counts.completed }, { id: 'all', label: 'All', count: counts.all }]} className="border-b-0" />
           {overdueCount > 0 && f.values.due !== 'overdue' && <button type="button" onClick={() => f.set('due', 'overdue')} className="rounded-md py-2 text-body-sm font-medium text-critical-fg hover:underline">{overdueCount} overdue →</button>}
         </div>
-        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search tasks" searchPlaceholder="Search tasks, owners or risk IDs" noun="tasks" resultCount={rows.length}
+        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search tasks" searchPlaceholder="Search tasks" noun="tasks" resultCount={rows.length}
           values={f.values} onChange={(id, v) => f.set(id as never, v)} onClear={() => { const v = f.values.view; f.clear(); if (v !== 'open') f.set('view', v) }}
           filters={[
             { id: 'owner', label: 'Owner', options: owners },
             { id: 'status', label: 'Status', options: STATUSES.map((x) => ({ value: x, label: STATUS[x].label })) },
             { id: 'priority', label: 'Priority', options: PRIORITY_OPTIONS },
             { id: 'due', label: 'Due', options: [{ value: 'overdue', label: 'Overdue' }, { value: 'week', label: 'Next 7 days' }, { value: 'month', label: 'Next 30 days' }] },
-            { id: 'source', label: 'Created by', options: [{ value: 'ai', label: 'Atlas AI' }] },
+            { id: 'source', label: 'Source', options: [{ value: 'ai', label: 'Created by Atlas AI' }] },
           ]} />
         {load.loading ? <TableSkeleton label="Loading tasks" /> : load.error ? <ErrorState title="We couldn’t load your tasks" onRetry={load.retry} detail="Error 503 · task-service timed out (simulated)" />
           : emptyAll ? <EmptyState icon={<PartyPopper />} title="You’re all caught up" description="There are no open tasks. New tasks appear here when risks need work." action={<Button onClick={() => setNewOpen(true)}>Create a task</Button>} />

@@ -53,7 +53,7 @@ export function Modal({ open, onClose, title, description, children, footer, siz
     <div className="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6">
       <div className="absolute inset-0 animate-fade-in bg-[var(--color-bg-overlay)]" onClick={() => dismissible && onClose()} aria-hidden />
       <div ref={ref} role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={description ? descId : undefined} tabIndex={-1} data-ds="Modal"
-        className={cn('relative flex max-h-[90vh] w-full flex-col overflow-hidden rounded-t-xl bg-elevated shadow-lg outline-none animate-slide-up sm:rounded-xl sm:animate-pop', width)}>
+        className={cn('relative flex max-h-[90vh] w-full flex-col overflow-hidden rounded-t-2xl bg-elevated shadow-lg outline-none animate-slide-up sm:rounded-2xl sm:animate-pop', width)}>
         <div className="flex items-start gap-3 border-b border-line px-5 py-4 sm:px-6">
           {tone === 'danger' && <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-critical-bg text-critical-fg"><AlertTriangle className="h-4 w-4" aria-hidden /></span>}
           <div className="min-w-0 flex-1">
@@ -92,8 +92,8 @@ export function Drawer({ open, onClose, title, description, children, footer, wi
       <div className="absolute inset-0 animate-fade-in bg-[var(--color-bg-overlay)]" onClick={onClose} aria-hidden />
       <div ref={ref} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1} data-ds="Drawer"
         className={cn('absolute flex flex-col bg-elevated shadow-lg outline-none',
-          'inset-x-0 bottom-0 max-h-[88vh] rounded-t-xl animate-slide-up',
-          'md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-[var(--drawer-width)] md:max-w-full md:rounded-none md:rounded-l-xl md:animate-slide-in-right',
+          'inset-x-0 bottom-0 max-h-[88vh] rounded-t-2xl animate-slide-up',
+          'md:inset-y-3 md:left-auto md:right-3 md:max-h-none md:w-[var(--drawer-width)] md:max-w-full md:rounded-2xl md:animate-slide-in-right',
           width === 'lg' && 'md:w-[40rem]')}>
         <div className="mx-auto mt-2 h-1 w-9 rounded-full bg-line-strong md:hidden" aria-hidden />
         <div className="flex items-start gap-3 border-b border-line px-5 py-4">

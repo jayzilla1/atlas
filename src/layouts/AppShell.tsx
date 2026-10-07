@@ -43,7 +43,7 @@ export function AppShell() {
     main.current?.focus({ preventScroll: true }) // announce route change to keyboard / screen-reader users
   }, [loc.pathname])
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-canvas">
       <a href="#main" className="skip-link">Skip to main content</a>
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
@@ -55,10 +55,10 @@ export function AppShell() {
           </div>
         )}
         <Header />
-        <main id="main" ref={main} tabIndex={-1} className="mx-auto w-full max-w-page flex-1 px-4 py-6 outline-none sm:px-6 lg:px-8 lg:py-8">
+        <main id="main" ref={main} tabIndex={-1} className="mx-auto w-full max-w-page flex-1 px-4 pb-8 pt-2 outline-none sm:px-6 lg:px-8">
           <Suspense fallback={<LoadingState label="Loading…" />}><Outlet /></Suspense>
         </main>
-        <footer className="border-t border-line px-6 py-4 text-caption text-ink-tertiary">Atlas is a fictional product created for design portfolio purposes. All people, companies and data are invented.</footer>
+        <footer className="px-8 pb-6 pt-2 text-caption text-ink-tertiary">Atlas is a fictional product created for design portfolio purposes. All people, companies and data are invented.</footer>
       </div>
       <CommandPalette />
       <DemoPanel />

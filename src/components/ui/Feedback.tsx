@@ -68,7 +68,7 @@ export function CardGridSkeleton({ count = 4 }: { count?: number }) {
 
 export function ProgressBar({ value, max = 100, tone = 'info', label, showValue, size = 'md', className }: { value: number; max?: number; tone?: 'info' | 'success' | 'warning' | 'critical' | 'ai'; label: string; showValue?: boolean; size?: 'sm' | 'md'; className?: string }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100))
-  const color = { info: 'bg-action', success: 'bg-success-solid', warning: 'bg-warning-solid', critical: 'bg-critical-solid', ai: 'bg-ai' }[tone]
+  const color = { info: 'bg-brand', success: 'bg-success-solid', warning: 'bg-warning-solid', critical: 'bg-critical-solid', ai: 'bg-ai' }[tone]
   return (
     <div className={cn('flex items-center gap-3', className)} data-ds="ProgressBar">
       <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={max} aria-valuenow={Math.round(value)} className={cn('w-full overflow-hidden rounded-full bg-sunken', size === 'md' ? 'h-2' : 'h-1.5')}>

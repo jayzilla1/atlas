@@ -13,6 +13,7 @@ export default {
     screens: { sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px' },
     extend: {
       colors: {
+        brand: v('color-brand'),
         canvas: v('color-bg-canvas'),
         surface: v('color-bg-surface'),
         elevated: v('color-bg-elevated'),
@@ -46,12 +47,13 @@ export default {
       },
       fontFamily: {
         sans: ['"Inter Variable"', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        heading: ['"Plus Jakarta Sans Variable"', '"Inter Variable"', 'system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       fontSize: {
         // [size, {lineHeight, letterSpacing, fontWeight}] — mirrors the type tokens
-        'display': ['var(--font-size-display)', { lineHeight: 'var(--line-height-display)', letterSpacing: '-0.025em', fontWeight: '600' }],
-        'title-1': ['var(--font-size-title-1)', { lineHeight: 'var(--line-height-title-1)', letterSpacing: '-0.02em', fontWeight: '600' }],
+        'display': ['var(--font-size-display)', { lineHeight: 'var(--line-height-display)', letterSpacing: '-0.03em', fontWeight: '700' }],
+        'title-1': ['var(--font-size-title-1)', { lineHeight: 'var(--line-height-title-1)', letterSpacing: '-0.025em', fontWeight: '700' }],
         'title-2': ['var(--font-size-title-2)', { lineHeight: 'var(--line-height-title-2)', letterSpacing: '-0.015em', fontWeight: '600' }],
         'title-3': ['var(--font-size-title-3)', { lineHeight: 'var(--line-height-title-3)', letterSpacing: '-0.01em', fontWeight: '600' }],
         'body-lg': ['var(--font-size-body-lg)', { lineHeight: 'var(--line-height-body-lg)' }],
@@ -61,10 +63,10 @@ export default {
         'overline': ['var(--font-size-overline)', { lineHeight: 'var(--line-height-overline)', letterSpacing: '0.06em', fontWeight: '600' }],
       },
       borderRadius: {
-        xs: v('radius-xs'), sm: v('radius-sm'), md: v('radius-md'), lg: v('radius-lg'), xl: v('radius-xl'), full: v('radius-full'),
+        xs: v('radius-xs'), sm: v('radius-sm'), md: v('radius-md'), lg: v('radius-lg'), xl: v('radius-xl'), '2xl': v('radius-2xl'), full: v('radius-full'),
       },
       boxShadow: {
-        xs: v('shadow-xs'), sm: v('shadow-sm'), md: v('shadow-md'), lg: v('shadow-lg'), focus: v('shadow-focus'),
+        card: v('shadow-card'), xs: v('shadow-xs'), sm: v('shadow-sm'), md: v('shadow-md'), lg: v('shadow-lg'), focus: v('shadow-focus'),
       },
       transitionDuration: { fast: v('motion-duration-fast'), base: v('motion-duration-base'), slow: v('motion-duration-slow') },
       transitionTimingFunction: { standard: v('motion-ease-standard'), emphasized: v('motion-ease-emphasized') },

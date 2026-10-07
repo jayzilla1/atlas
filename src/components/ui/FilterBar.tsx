@@ -22,13 +22,13 @@ export function FilterBar({ search, onSearch, searchLabel, searchPlaceholder, fi
   const controls = (stacked: boolean) => filters.map((f) => (
     stacked
       ? <Field key={f.id} label={f.label}>{({ id }) => <Select id={id} value={values[f.id] ?? 'all'} onChange={(e) => onChange(f.id, e.target.value)} options={[{ value: 'all', label: f.allLabel ?? `All ${f.label.toLowerCase()}` }, ...f.options]} />}</Field>
-      : <div key={f.id} className="min-w-[8.5rem]"><label className="sr-only" htmlFor={`f-${f.id}`}>{f.label}</label><Select id={`f-${f.id}`} value={values[f.id] ?? 'all'} onChange={(e) => onChange(f.id, e.target.value)} options={[{ value: 'all', label: `${f.label}: ${f.allLabel ?? 'All'}` }, ...f.options.map((o) => ({ ...o, label: `${f.label}: ${o.label}` }))]} /></div>
+      : <div key={f.id} className="w-[9.25rem]"><label className="sr-only" htmlFor={`f-${f.id}`}>{f.label}</label><Select id={`f-${f.id}`} className="!rounded-full truncate pl-4 pr-8 font-medium" value={values[f.id] ?? 'all'} onChange={(e) => onChange(f.id, e.target.value)} options={[{ value: 'all', label: `${f.label}: ${f.allLabel ?? 'All'}` }, ...f.options.map((o) => ({ ...o, label: `${f.label}: ${o.label}` }))]} /></div>
   ))
   return (
-    <div data-ds="FilterBar" className="flex flex-col gap-3 border-b border-line p-4">
+    <div data-ds="FilterBar" className="flex flex-col gap-3 border-b border-line px-6 py-4">
       <div className="flex flex-wrap items-center gap-2">
-        <SearchInput className="min-w-0 flex-1 md:w-64 md:flex-none" value={search} onChange={onSearch} label={searchLabel} placeholder={searchPlaceholder} />
-        <div className="hidden flex-wrap items-center gap-2 md:flex">{controls(false)}</div>
+        <SearchInput className="min-w-0 flex-1 md:w-60 md:flex-none" value={search} onChange={onSearch} label={searchLabel} placeholder={searchPlaceholder} />
+        <div className="hidden md:contents">{controls(false)}</div>
         <Button className="md:hidden" iconLeft={<SlidersHorizontal className="h-4 w-4" aria-hidden />} onClick={() => setSheet(true)}>Filters{active > 0 && <span className="rounded-full bg-action px-1.5 text-caption text-action-on">{active}</span>}</Button>
         {trailing && <div className="ml-auto">{trailing}</div>}
       </div>

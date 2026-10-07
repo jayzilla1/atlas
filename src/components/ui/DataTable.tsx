@@ -99,14 +99,14 @@ export function DataTable<T>({ columns, rows, getRowKey, caption, defaultSort, p
         <table className="w-full border-collapse text-left text-body">
           <caption className="sr-only">{caption}. {sort ? `Sorted by ${columns.find((c) => c.id === sort.id)?.header}, ${sort.dir === 'asc' ? 'ascending' : 'descending'}.` : ''}</caption>
           <thead>
-            <tr className="border-b border-line bg-[var(--table-header-bg)]">
+            <tr className="border-b border-line">
               {renderExpanded && <th scope="col" className="w-10 px-2"><span className="sr-only">Expand</span></th>}
               {columns.map((c) => {
                 const active = sort?.id === c.id
                 return (
                   <th key={c.id} scope="col" aria-sort={active ? (sort!.dir === 'asc' ? 'ascending' : 'descending') : c.sortValue ? 'none' : undefined}
                     style={c.width ? { width: c.width } : undefined}
-                    className={cn('whitespace-nowrap px-4 py-2.5 text-caption font-semibold text-ink-secondary', c.align === 'right' && 'text-right', c.hideBelow && hideCls[c.hideBelow])}>
+                    className={cn('whitespace-nowrap px-4 py-3 text-overline uppercase text-ink-secondary', c.align === 'right' && 'text-right', c.hideBelow && hideCls[c.hideBelow])}>
                     {c.sortValue ? (
                       <button type="button" onClick={() => toggleSort(c)} className={cn('-mx-1.5 inline-flex items-center gap-1 rounded-sm px-1.5 py-0.5 hover:bg-line hover:text-ink', active && 'text-ink')}>
                         {c.header}

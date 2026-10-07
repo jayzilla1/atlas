@@ -70,7 +70,7 @@ export function RisksPage() {
         <div className="px-4 pt-1">
           <Tabs label="Risk status" value={f.values.view} onChange={(v) => f.set('view', v)} tabs={[{ id: 'open', label: 'Open', count: counts.open }, { id: 'closed', label: 'Closed', count: counts.closed }, { id: 'all', label: 'All', count: counts.all }]} />
         </div>
-        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search risks" searchPlaceholder="Search by name, ID or owner" noun="risks" resultCount={rows.length}
+        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search risks" searchPlaceholder="Search risks" noun="risks" resultCount={rows.length}
           values={f.values} onChange={(id, v) => f.set(id as never, v)} onClear={() => { const v = f.values.view; f.clear(); if (v !== 'open') f.set('view', v) }}
           filters={[
             { id: 'severity', label: 'Severity', options: SEVERITY_ORDER.map((x) => ({ value: x, label: SEVERITY_META[x].label })) },

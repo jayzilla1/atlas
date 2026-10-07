@@ -9,7 +9,7 @@ import { useUi } from '@/layouts/UiContext'
 export function AiInsight() {
   const { openAsk } = useUi()
   return (
-    <section aria-labelledby="insight-h" data-ds="AiInsight" className="rounded-lg border border-ai-border bg-ai-subtle p-5 [border-left:var(--ai-rule-width)_solid_var(--color-ai-accent)]">
+    <section aria-labelledby="insight-h" data-ds="AiInsight" className="rounded-xl border border-ai-border bg-ai-subtle p-6 ">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="flex items-center gap-1.5 text-overline uppercase text-ai-ink"><Sparkles className="h-3.5 w-3.5" aria-hidden />Atlas AI insight</p>
         <ConfidenceBadge level="high" />

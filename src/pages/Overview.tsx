@@ -15,7 +15,7 @@ import { ProgressBar } from '@/components/ui/Feedback'
 import { useStore } from '@/state/store'
 import { companyFacts, outstandingTasks } from '@/data/selectors'
 import { HEALTH_AREAS, HEALTH_LAST_MONTH, HEALTH_SCORE } from '@/data/insights'
-import { dueLabel } from '@/utils/dates'
+import { dueLabel, daysFromToday } from '@/utils/dates'
 import { usePageTitle } from '@/hooks/usePage'
 import { cn } from '@/utils/cn'
 import type { ReactNode } from 'react'
@@ -28,6 +28,7 @@ export function OverviewPage() {
   const f = companyFacts(s.risks, s.tasks)
   const upcoming = outstandingTasks(s.tasks).sort((a, b) => a.dueDate.localeCompare(b.dueDate)).slice(0, 6)
   const hour = 9
+  const dueThisWeek = outstandingTasks(s.tasks).filter((t) => daysFromToday(t.dueDate) <= 7).length
   const attention: Attn[] = [
     { Icon: ShieldAlert, tone: 'critical', count: f.bySeverity.critical, title: <>critical {f.bySeverity.critical === 1 ? 'risk' : 'risks'}</>, why: 'A former contractor still has access, and the payroll provider’s security report has expired.', to: '/risks?severity=critical', label: 'Critical' },
     { Icon: Building2, tone: 'warning', count: f.vendorsDueSoon, title: <>vendor reviews due soon</>, why: 'Reviews check a vendor’s security documents and contract. Due within 30 days.', to: '/vendors?review=due_soon', label: 'Due soon' },
@@ -39,6 +40,14 @@ export function OverviewPage() {
     <>
       <PageHeader title={`Good ${hour < 12 ? 'morning' : 'afternoon'}, ${s.currentUser.name.split(' ')[0]}`}
         description="Here’s what you need to know today — Wednesday, October 7." />
+
+      {/* KPI strip — the four numbers a leader checks first */}
+      <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <MetricCard label="Open risks" value={f.openRisks} href="/risks" icon={<ShieldAlert />} iconTone="critical" hint={`${f.bySeverity.critical} critical · ${f.bySeverity.high} high`} />
+        <MetricCard label="Tasks due this week" value={dueThisWeek} href="/tasks?due=week" icon={<ListChecks />} iconTone="warning" hint={`${f.overdueTasks} overdue`} />
+        <MetricCard label="Training complete" term={<Term id="security-training">Training complete</Term>} value="94%" href="/people?training=missing" icon={<GraduationCap />} delta={{ text: '−1.2 pts', direction: 'down' }} deltaGood={false} hint={`${f.missingTraining} people left`} />
+        <MetricCard label="Controls passing" term={<Term id="compliance-control">Controls passing</Term>} value={<>{f.controlsPassing}<span className="text-body font-medium text-ink-tertiary"> / {f.controls}</span></>} href="/reports" icon={<ShieldCheck />} iconTone="success" hint="2 failing · 4 need attention" />
+      </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
         {/* Overall health */}
@@ -57,7 +66,7 @@ export function OverviewPage() {
               <li key={a.id}>
                 <Link to={a.href} className="block rounded-sm">
                   <div className="mb-1 flex items-center justify-between text-body-sm"><span className="font-medium">{a.label}</span><span className="tabular-nums text-ink-secondary">{a.now} <span className={cn('text-caption', a.now < a.lastMonth ? 'text-critical-fg' : 'text-ink-tertiary')}>{a.now === a.lastMonth ? '±0' : `${a.now - a.lastMonth > 0 ? '+' : '−'}${Math.abs(a.now - a.lastMonth)}`}</span></span></div>
-                  <ProgressBar value={a.now} label={`${a.label} score`} tone={a.now >= 85 ? 'success' : a.now >= 75 ? 'warning' : 'critical'} size="sm" />
+                  <ProgressBar value={a.now} label={`${a.label} score`} tone={a.now >= 85 ? 'info' : a.now >= 75 ? 'warning' : 'critical'} size="sm" />
                 </Link>
               </li>
             ))}
@@ -65,13 +74,13 @@ export function OverviewPage() {
         </Card>
 
         {/* Attention required */}
-        <Card aria-labelledby="attn-h" className="lg:col-span-2">
+        <Card aria-labelledby="attn-h" className="flex flex-col lg:col-span-2">
           <CardHeader id="attn-h" title="Attention required" description="The few things most worth your time today, in priority order." actions={<SectionLink to="/risks">All {f.openRisks} risks</SectionLink>} />
           <ul className="divide-y divide-line">
             {attention.map((a) => (
               <li key={a.to}>
                 <Link to={a.to} className="group -mx-2 flex items-start gap-3.5 rounded-md px-2 py-3.5 transition-colors duration-fast hover:bg-hover">
-                  <span className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-lg', a.tone === 'critical' ? 'bg-critical-bg text-critical-fg' : 'bg-warning-bg text-warning-fg')}><a.Icon className="h-5 w-5" aria-hidden /></span>
+                  <span className={cn('flex h-11 w-11 shrink-0 items-center justify-center rounded-full', a.tone === 'critical' ? 'bg-critical-bg text-critical-fg' : 'bg-warning-bg text-warning-fg')}><a.Icon className="h-5 w-5" aria-hidden /></span>
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-baseline gap-x-2"><span className="text-title-2 tabular-nums">{a.count}</span><span className="text-body font-semibold">{a.title}</span></span>
                     <span className="mt-0.5 block text-body-sm text-ink-secondary">{a.why}</span>
@@ -82,6 +91,7 @@ export function OverviewPage() {
               </li>
             ))}
           </ul>
+          <p className="mt-auto flex items-center gap-2 border-t border-line pt-4 text-body-sm text-ink-secondary"><ClipboardCheck className="h-4 w-4" aria-hidden />Atlas re-checks these every night. Last sync today at 8:40 AM.</p>
         </Card>
       </div>
 
@@ -123,14 +133,12 @@ export function OverviewPage() {
         <Card aria-labelledby="glance-h">
           <CardHeader id="glance-h" title="Your company at a glance" />
           <div className="grid grid-cols-2 gap-3">
-            <MetricCard label="People" value={f.employees} href="/people" icon={<Users className="h-4 w-4" />} />
-            <MetricCard label="Applications" value={f.applications} href="/applications" icon={<AppWindow className="h-4 w-4" />} />
-            <MetricCard label="Vendors" value={f.vendors} href="/vendors" icon={<Building2 className="h-4 w-4" />} />
-            <MetricCard label="Policies" value={f.policies} href="/policies" icon={<FileText className="h-4 w-4" />} />
-            <MetricCard label="Controls passing" term={<Term id="compliance-control">Controls passing</Term>} value={<>{f.controlsPassing}<span className="text-body text-ink-tertiary">/{f.controls}</span></>} href="/reports" icon={<ShieldCheck className="h-4 w-4" />} />
-            <MetricCard label="Open tasks" value={f.outstandingTasks} href="/tasks" icon={<ListChecks className="h-4 w-4" />} />
+            <MetricCard label="People" value={f.employees} href="/people" icon={<Users />} />
+            <MetricCard label="Applications" value={f.applications} href="/applications" icon={<AppWindow />} />
+            <MetricCard label="Vendors" value={f.vendors} href="/vendors" icon={<Building2 />} />
+            <MetricCard label="Policies" value={f.policies} href="/policies" icon={<FileText />} />
           </div>
-          <p className="mt-3 flex items-center gap-1.5 text-caption text-ink-secondary"><ClipboardCheck className="h-3.5 w-3.5" aria-hidden />Last synced today at 8:40 AM from 69 connected apps.</p>
+          
         </Card>
       </div>
     </>

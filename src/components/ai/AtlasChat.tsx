@@ -71,7 +71,7 @@ export function AtlasChat({ threadId, suggestions, riskId, className, emptyTitle
           <textarea id={`composer-${threadId}`} rows={1} value={text} autoFocus={autoFocus} placeholder={riskId ? 'Ask about this risk…' : 'Ask about your risks, people, vendors…'}
             onChange={(e) => setText(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(text) } }}
             className="max-h-32 min-h-[2.25rem] flex-1 resize-none bg-transparent px-2 py-1.5 text-body outline-none placeholder:text-ink-tertiary" />
-          <Button type="submit" variant="primary" size="md" aria-label="Send question" disabled={!text.trim() || busy} className="h-9 w-9 px-0"><ArrowUp className="h-4 w-4" aria-hidden /></Button>
+          <Button type="submit" variant="primary" size="md" aria-label="Send question" disabled={!text.trim() || busy} className="!h-10 !w-10 !px-0"><ArrowUp className="h-4 w-4" aria-hidden /></Button>
         </div>
         <p className="mt-2 text-center text-caption text-ink-tertiary">Atlas AI can make mistakes. Check the sources before acting. It never changes anything without your approval.</p>
       </form>

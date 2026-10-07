@@ -47,7 +47,7 @@ export function ApplicationsPage() {
     <>
       <PageHeader title="Applications" description={<>Every tool your people sign in to. Atlas checks who has access and whether it was recently confirmed in an <Term id="access-review">access review</Term>.</>} />
       <Card padded={false}>
-        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search applications" searchPlaceholder="Search apps, categories or owners" noun="applications" resultCount={rows.length}
+        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search applications" searchPlaceholder="Search apps" noun="applications" resultCount={rows.length}
           values={f.values} onChange={(id, v) => f.set(id as never, v)} onClear={f.clear}
           filters={[
             { id: 'category', label: 'Category', options: categories.map((c) => ({ value: c, label: c })) },

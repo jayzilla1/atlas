@@ -8,18 +8,18 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'subt
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
 const base =
-  'relative inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-fast ease-standard focus-visible:outline-none active:translate-y-px motion-reduce:active:translate-y-0 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50'
+  'relative inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-[background-color,border-color,color,box-shadow,transform] duration-fast ease-standard focus-visible:outline-none active:translate-y-px motion-reduce:active:translate-y-0 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50'
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-action text-action-on shadow-xs hover:bg-action-hover active:bg-action-pressed aria-disabled:hover:bg-action disabled:hover:bg-action',
-  secondary: 'border border-line-strong bg-surface text-ink shadow-xs hover:bg-hover active:bg-sunken aria-disabled:hover:bg-surface',
+  secondary: 'border border-line bg-surface text-ink shadow-xs hover:bg-hover active:bg-sunken aria-disabled:hover:bg-surface',
   ghost: 'text-ink-secondary hover:bg-sunken hover:text-ink active:bg-line aria-disabled:hover:bg-transparent',
   subtle: 'bg-action-subtle text-action-ink hover:brightness-95 active:brightness-90',
   danger: 'bg-critical-fg text-ink-inverse shadow-xs hover:brightness-110 active:brightness-90',
 }
 const sizes: Record<ButtonSize, string> = {
-  sm: 'h-8 px-3 text-body-sm',
-  md: 'h-9 px-3.5 text-body',
-  lg: 'h-11 px-5 text-body-lg',
+  sm: 'h-8 px-3.5 text-body-sm',
+  md: 'h-10 px-5 text-body',
+  lg: 'h-12 px-6 text-body-lg',
 }
 export const buttonClasses = (variant: ButtonVariant = 'secondary', size: ButtonSize = 'md', className?: string) => cn(base, variants[variant], sizes[size], className)
 
@@ -69,7 +69,7 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 }
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
   { label, variant = 'ghost', size = 'md', pressed, className, children, type = 'button', ...rest }, ref) {
-  const dim = { sm: 'h-8 w-8', md: 'h-9 w-9', lg: 'h-11 w-11' }[size]
+  const dim = { sm: 'h-8 w-8', md: 'h-10 w-10', lg: 'h-12 w-12' }[size]
   return (
     <Tooltip content={label} placement="bottom">
       <button ref={ref} type={type} aria-label={label} aria-pressed={pressed} data-ds="IconButton" data-ds-variant={variant}

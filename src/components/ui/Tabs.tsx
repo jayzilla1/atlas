@@ -17,16 +17,16 @@ export function Tabs({ tabs, value, onChange, label, className }: { tabs: TabDef
   }
   return (
     <div role="tablist" aria-label={label} onKeyDown={onKey} data-ds="Tabs"
-      className={cn('scroll-thin flex gap-1 overflow-x-auto border-b border-line', className)}>
+      className={cn('scroll-thin inline-flex max-w-full gap-1 overflow-x-auto rounded-full bg-sunken p-1', className)}>
       {tabs.map((t) => {
         const selected = t.id === value
         return (
           <button key={t.id} ref={(el) => { refs.current[t.id] = el }} role="tab" type="button" aria-selected={selected}
             tabIndex={selected ? 0 : -1} onClick={() => onChange(t.id)}
-            className={cn('relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap rounded-t-md border-b-2 px-3 py-2.5 text-body font-medium transition-colors duration-fast focus-visible:shadow-[inset_0_0_0_2px_var(--color-focus-ring)]',
-              selected ? 'border-action text-ink' : 'border-transparent text-ink-secondary hover:text-ink')}>
+            className={cn('relative flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 text-body font-semibold transition-[background-color,color,box-shadow] duration-fast focus-visible:shadow-[inset_0_0_0_2px_var(--color-focus-ring)]',
+              selected ? 'bg-surface text-ink shadow-sm' : 'text-ink-secondary hover:text-ink')}>
             {t.icon}{t.label}
-            {t.count !== undefined && <span className={cn('rounded-full px-1.5 text-caption tabular-nums', selected ? 'bg-action-subtle text-action-ink' : 'bg-sunken text-ink-secondary')}>{t.count}</span>}
+            {t.count !== undefined && <span className={cn('rounded-full px-1.5 text-caption tabular-nums', selected ? 'bg-action-subtle text-action-ink' : 'bg-line text-ink-secondary')}>{t.count}</span>}
           </button>
         )
       })}

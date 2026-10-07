@@ -5,20 +5,20 @@
    ========================================================================== */
 :root {
   /* Button */
-  --button-radius: var(--radius-md);
+  --button-radius: var(--radius-full);
   --button-primary-bg: var(--color-action-primary);
   --button-primary-bg-hover: var(--color-action-primary-hover);
   --button-primary-bg-pressed: var(--color-action-primary-pressed);
   --button-primary-fg: var(--color-action-primary-contrast);
   --button-secondary-bg: var(--color-bg-surface);
   --button-secondary-bg-hover: var(--color-bg-hover);
-  --button-secondary-border: var(--color-border-strong);
+  --button-secondary-border: var(--color-border-default);
   --button-secondary-fg: var(--color-text-primary);
   --button-danger-bg: var(--color-critical-fg);
   --button-danger-fg: var(--color-text-inverse);
-  --button-height-sm: 2rem;
-  --button-height-md: 2.25rem;
-  --button-height-lg: 2.75rem;
+  --button-height-sm: 2.125rem;
+  --button-height-md: 2.5rem;
+  --button-height-lg: 3rem;
 
   /* Input */
   --input-radius: var(--radius-md);
@@ -27,27 +27,27 @@
   --input-border-hover: var(--color-text-tertiary);
   --input-border-error: var(--color-critical-solid);
   --input-border-success: var(--color-success-solid);
-  --input-height: 2.25rem;
+  --input-height: 2.5rem;
 
   /* Card */
-  --card-radius: var(--radius-lg);
+  --card-radius: var(--radius-xl);
   --card-bg: var(--color-bg-surface);
   --card-border: var(--color-border-default);
-  --card-padding: var(--space-5);
-  --card-shadow: var(--shadow-xs);
+  --card-padding: var(--space-6);
+  --card-shadow: var(--shadow-card);
 
   /* Badge */
-  --badge-radius: var(--radius-sm);
+  --badge-radius: var(--radius-full);
   --badge-height: 1.5rem;
 
   /* Table */
-  --table-header-bg: var(--color-bg-sunken);
+  --table-header-bg: transparent;
   --table-row-hover: var(--color-bg-hover);
   --table-row-height: 3.25rem;
   --table-border: var(--color-border-default);
 
   /* Overlay surfaces */
-  --modal-radius: var(--radius-xl);
+  --modal-radius: var(--radius-2xl);
   --modal-shadow: var(--shadow-lg);
   --drawer-width: 30rem;
 

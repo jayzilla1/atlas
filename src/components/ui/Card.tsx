@@ -5,13 +5,13 @@ import { cn } from '@/utils/cn'
 import { Tooltip } from './Tooltip'
 
 export function Card({ children, className, padded = true, as: Tag = 'section', ...rest }: { children: ReactNode; className?: string; padded?: boolean; as?: 'section' | 'div' | 'article' | 'li' } & React.HTMLAttributes<HTMLElement>) {
-  return <Tag data-ds="Card" className={cn('rounded-lg border border-line bg-surface shadow-xs', padded && 'p-5', className)} {...(rest as object)}>{children}</Tag>
+  return <Tag data-ds="Card" className={cn('rounded-xl border border-line bg-surface shadow-card', padded && 'p-6', className)} {...(rest as object)}>{children}</Tag>
 }
 
 export function CardHeader({ title, description, actions, id, level = 2, icon }: { title: ReactNode; description?: ReactNode; actions?: ReactNode; id?: string; level?: 2 | 3; icon?: ReactNode }) {
   const H = level === 2 ? 'h2' : 'h3'
   return (
-    <div className="mb-4 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+    <div className="mb-5 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
       <div className="flex min-w-0 items-start gap-2.5">
         {icon && <span className="mt-0.5 text-ink-tertiary" aria-hidden>{icon}</span>}
         <div className="min-w-0">
@@ -25,22 +25,22 @@ export function CardHeader({ title, description, actions, id, level = 2, icon }:
 }
 
 /* ---------- Metric card ---------- */
-export function MetricCard({ label, value, hint, delta, deltaGood, href, icon, children, term }: {
+export function MetricCard({ label, value, hint, delta, deltaGood, href, icon, iconTone = 'brand', children, term }: {
   label: string; value: ReactNode; hint?: ReactNode
   /** Change vs. a previous period, e.g. { value: '+3', direction: 'up' } */
   delta?: { text: string; direction: 'up' | 'down' | 'flat' }
   /** Whether the change is good news (drives colour + wording, never colour alone) */
   deltaGood?: boolean
-  href?: string; icon?: ReactNode; children?: ReactNode; term?: ReactNode
+  href?: string; icon?: ReactNode; iconTone?: 'brand' | 'critical' | 'warning' | 'success'; children?: ReactNode; term?: ReactNode
 }) {
   const D = delta?.direction === 'up' ? ArrowUpRight : delta?.direction === 'down' ? ArrowDownRight : Minus
   const body = (
     <>
       <div className="flex items-center justify-between gap-2">
-        <p className="text-body-sm font-medium text-ink-secondary">{term ?? label}</p>
-        {icon && <span className="text-ink-tertiary" aria-hidden>{icon}</span>}
+        <p className="text-overline uppercase text-ink-secondary">{term ?? label}</p>
+        {icon && <span className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-full [&>svg]:h-[18px] [&>svg]:w-[18px]', { brand: 'bg-action-subtle text-brand', critical: 'bg-critical-bg text-critical-fg', warning: 'bg-warning-bg text-warning-fg', success: 'bg-success-bg text-success-fg' }[iconTone])} aria-hidden>{icon}</span>}
       </div>
-      <p className="mt-2 text-title-1 tabular-nums">{value}</p>
+      <p className="mt-1 font-heading text-title-1 tabular-nums">{value}</p>
       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
         {delta && (
           <span className={cn('inline-flex items-center gap-0.5 text-caption font-semibold', deltaGood === undefined ? 'text-ink-secondary' : deltaGood ? 'text-success-fg' : 'text-critical-fg')}>
@@ -53,7 +53,7 @@ export function MetricCard({ label, value, hint, delta, deltaGood, href, icon, c
       {children}
     </>
   )
-  const cls = 'block rounded-lg border border-line bg-surface p-4 shadow-xs'
+  const cls = 'block rounded-xl border border-line bg-surface p-5 shadow-card'
   return href
     ? <Link to={href} data-ds="MetricCard" className={cn(cls, 'transition-[border-color,box-shadow] duration-fast hover:border-line-strong hover:shadow-sm')}>{body}</Link>
     : <div data-ds="MetricCard" className={cls}>{body}</div>

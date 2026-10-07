@@ -59,7 +59,7 @@ export function PeoplePage() {
       <PageHeader title="People" description={<>Everyone who works at Harborlight — employees and contractors — with the apps they can open and whether they’re up to date on <Term id="security-training">security training</Term>.</>} />
       <Card padded={false}>
         <div className="px-4 pt-1"><Tabs label="People view" value={f.values.view} onChange={(v) => f.set('view', v)} tabs={[{ id: 'current', label: 'Current', count: current }, { id: 'former', label: 'Former', count: former }, { id: 'all', label: 'Everyone', count: s.people.length }]} /></div>
-        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search people" searchPlaceholder="Search by name, title or department" noun="people" resultCount={rows.length}
+        <FilterBar search={f.search} onSearch={f.setSearch} searchLabel="Search people" searchPlaceholder="Search people" noun="people" resultCount={rows.length}
           values={f.values} onChange={(id, v) => f.set(id as never, v)} onClear={() => { const v = f.values.view; f.clear(); if (v !== 'current') f.set('view', v) }}
           filters={[
             { id: 'department', label: 'Department', options: DEPARTMENT_NAMES.map((d) => ({ value: d, label: d })) },

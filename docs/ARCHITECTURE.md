@@ -88,10 +88,10 @@ Three token layers, all CSS custom properties (`src/styles/tokens`):
 Tailwind (`tailwind.config.js`) only *references* semantic tokens, so utilities like `bg-surface`
 or `text-ink-secondary` are theme-aware by construction.
 
-* **Type** — Inter Variable; 9-step scale (display → overline), tight tracking on headings.
+* **Type** — Plus Jakarta Sans (headings, numbers) + Inter (body); 9-step scale (display → overline), tight tracking on headings.
 * **Space** — 4px base grid (`--space-1`…`--space-16`).
-* **Radius** — restrained: 4 / 6 / 8 / 12; cards use 12 max (no pill-shaped cards).
-* **Elevation** — borders first, shadow second (xs → lg). Elevation is used for overlays.
+* **Radius** — generous: 6 / 8 / 12 / 14 / 20; cards 20, inputs 12, buttons/badges/tabs/filters are pills.
+* **Elevation** — cards float on a soft shadow over a cool canvas; overlays use the large shadow.
 * **Motion** — 3 durations, 2 easings; everything collapses to ~0 under `prefers-reduced-motion`.
 * **Colour semantics** — `bg / fg / border / solid` families for critical, high, warning, success,
   info, neutral + a distinct AI family. Contrast checked ≥ 4.5:1 for text pairs.
