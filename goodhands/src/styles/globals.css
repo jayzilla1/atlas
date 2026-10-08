@@ -1,4 +1,5 @@
-@import '@fontsource-variable/figtree';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/fraunces';
 @import './tokens.css';
 @tailwind base;
 @tailwind components;
@@ -7,13 +8,24 @@
 @layer base {
   html { -webkit-text-size-adjust: 100%; }
   body {
-    @apply bg-canvas text-ink antialiased;
+    @apply text-ink antialiased;
+    background-color: var(--canvas);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: 1.5;
     font-feature-settings: 'tnum' 1; /* tabular numbers: times and money line up in columns */
   }
-  h1, h2, h3, h4 { letter-spacing: -0.01em; }
+  h1, h2, h3, h4 { letter-spacing: -0.015em; }
+  /* Fraunces — a soft, warm serif — gives page titles and big numbers the GoodHands voice. */
+  h1, h2, .font-display { font-family: var(--font-display); font-variant-numeric: lining-nums tabular-nums; }
+  /* On large screens the app floats as a rounded window over a warm, tinted backdrop. */
+  @media (min-width: 1024px) {
+    body {
+      background-color: var(--backdrop);
+      background-image: radial-gradient(60rem 40rem at 8% 0%, #f9cfae 0%, transparent 60%), radial-gradient(50rem 36rem at 100% 100%, #e7d3ea 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+  }
   :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
   button { cursor: pointer; }
   button:disabled, [aria-disabled='true'] { cursor: not-allowed; }

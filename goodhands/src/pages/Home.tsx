@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, CalendarClock, ChevronDown, CircleCheck, Plane, Sparkles, Users } from 'lucide-react'
+import { ArrowRight, CalendarClock, ChevronDown, CircleCheck, Hourglass, Plane, Sparkles, UserCheck, UserX, Users } from 'lucide-react'
 import { Page } from '@/components/ui/Page'
+import { Ring } from '@/components/ui/Ring'
+import { Hero } from '@/components/domain/Hero'
 import { Card, Section } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Checkbox } from '@/components/ui/Form'
@@ -46,26 +48,34 @@ function HomeScreen() {
 
   return (
     <div>
-      <header className="mb-6">
-        <p className="text-small font-semibold text-ink-secondary">{fmtLong(now.date)}</p>
-        <h1 className="text-h2 sm:text-h1">{greeting(now.time)}, {d.settings.ownerName.split(' ')[0]}</h1>
-        <button type="button" onClick={() => openAssistant('What do I need to know today?')} className="group mt-3 flex min-h-control w-full max-w-xl items-center gap-2.5 rounded-full border border-line bg-surface px-4 text-left text-small text-ink-secondary transition-colors duration-fast hover:border-primary/50 hover:bg-primary-subtle/40">
-          <Sparkles className="h-4 w-4 text-primary" aria-hidden />
-          <span className="flex-1">Ask GoodHands: <span className="font-semibold text-ink">What do I need to know today?</span></span>
-          <ArrowRight className="h-4 w-4 text-ink-tertiary transition-transform duration-fast group-hover:translate-x-0.5" aria-hidden />
-        </button>
-      </header>
+      <Hero
+        eyebrow={fmtLong(now.date)}
+        title={<>{greeting(now.time)}, {d.settings.ownerName.split(' ')[0]}</>}
+        actions={<>
+          <Button size="lg" onClick={() => openAssistant('What do I need to know today?')} icon={<Sparkles className="h-4 w-4" />} className="!bg-white !text-ink hover:!bg-primary-subtle">What do I need to know today?</Button>
+          <Link to="/attendance"><Button size="lg" className="!border-white/60 !bg-transparent !text-white hover:!bg-white/15">Open Attendance</Button></Link>
+        </>}
+        aside={
+          <Ring value={s.inCare + s.checkedOut} max={s.expected} size={148} stroke={14} label={`${s.inCare + s.checkedOut} of ${s.expected} expected children have arrived`}>
+            <span className="font-display text-[2.5rem] font-semibold leading-none">{s.inCare + s.checkedOut}<span className="text-lead font-medium text-white/80">/{s.expected}</span></span>
+            <span className="mt-1 text-caption font-semibold text-white">here today</span>
+          </Ring>
+        }
+      >
+        {attention.length > 0 ? <>{plural(attention.length, 'thing')} need{attention.length === 1 ? 's' : ''} you today.</> : 'Everything is on track.'}
+        {s.notArrived > 0 && <> {s.notArrived} {s.notArrived === 1 ? 'child hasn’t' : 'children haven’t'} arrived yet.</>}
+      </Hero>
 
-      {/* TODAY'S SNAPSHOT — numbers, not cards. */}
-      <section aria-labelledby="snap" className="mb-8">
+      {/* TODAY'S SNAPSHOT — soft tinted tiles, one per status. Icon + word + number, never colour alone. */}
+      <section aria-labelledby="snap" className="mb-8 mt-5">
         <h2 id="snap" className="sr-only">Today’s snapshot</h2>
-        <dl className="grid grid-cols-3 gap-y-5 border-y border-line py-5 sm:grid-cols-5">
-          <Stat label="Expected" value={s.expected} hint={s.vacation ? `${s.vacation} on vacation not counted` : undefined} />
-          <Stat label="Present" value={s.inCare + s.checkedOut} tone="success" hint={s.late ? `${s.late} arrived late` : undefined} />
-          <Stat label="Not arrived" value={s.notArrived} tone={s.notArrived ? 'warning' : undefined} />
-          <Stat label="Absent" value={s.absent} tone={s.absent ? 'danger' : undefined} />
-          <Stat label="Vacation" value={s.vacation} />
-        </dl>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <Tile label="Expected" value={s.expected} icon={<Users />} tint="bg-primary-subtle text-primary-text" hint={s.vacation ? `${s.vacation} on vacation not counted` : undefined} />
+          <Tile label="Present" value={s.inCare + s.checkedOut} icon={<UserCheck />} tint="bg-success-bg text-success-text" hint={s.late ? `${s.late} arrived late` : undefined} />
+          <Tile label="Not arrived" value={s.notArrived} icon={<Hourglass />} tint="bg-warning-bg text-warning-text" />
+          <Tile label="Absent" value={s.absent} icon={<UserX />} tint="bg-danger-bg text-danger-text" />
+          <Tile label="Vacation" value={s.vacation} icon={<Plane />} tint="bg-info-bg text-info-text" />
+        </ul>
       </section>
 
       <div className="grid gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1fr)_21rem]">
@@ -187,14 +197,16 @@ function HomeScreen() {
   )
 }
 
-function Stat({ label, value, tone, hint }: { label: string; value: number; tone?: 'success' | 'warning' | 'danger'; hint?: string }) {
-  const color = tone === 'success' ? 'text-success-text' : tone === 'warning' ? 'text-warning-text' : tone === 'danger' ? 'text-danger-text' : 'text-ink'
+function Tile({ label, value, icon, tint, hint }: { label: string; value: number; icon: React.ReactNode; tint: string; hint?: string }) {
   return (
-    <div className="px-2 text-center first:pl-0 sm:border-l sm:border-line-subtle sm:first:border-l-0 sm:text-left sm:px-5 sm:first:pl-0">
-      <dt className="text-caption font-semibold uppercase tracking-wide text-ink-secondary">{label}</dt>
-      <dd className={cn('mt-1 text-display tabular-nums', color)}>{value}</dd>
-      {hint && <p className="mt-1 text-caption text-ink-secondary">{hint}</p>}
-    </div>
+    <li className={cn('rounded-lg p-4', tint)}>
+      <div className="flex items-center justify-between">
+        <p className="text-caption font-bold uppercase tracking-wide">{label}</p>
+        <span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 [&>svg]:h-[1.1rem] [&>svg]:w-[1.1rem]">{icon}</span>
+      </div>
+      <p className="mt-2 font-display text-display tabular-nums">{value}</p>
+      {hint && <p className="mt-1 text-caption font-medium">{hint}</p>}
+    </li>
   )
 }
 

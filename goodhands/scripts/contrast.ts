@@ -12,10 +12,15 @@ export const ratio = (a: string, b: string) => {
   return (x + 0.05) / (y + 0.05)
 }
 const pairs: [string, string, string, number][] = [
-  ['text on canvas', '#2A2420', '#FBF7F0', 4.5],
-  ['text-secondary on canvas', '#5C534B', '#FBF7F0', 4.5],
+  ['text on canvas', '#2A2420', '#F8F1E9', 4.5],
+  ['text-secondary on canvas', '#5C534B', '#F8F1E9', 4.5],
   ['text-secondary on surface', '#5C534B', '#FFFFFF', 4.5],
   ['text-tertiary on surface', '#6F655C', '#FFFFFF', 4.5],
+  ['white on hero gradient start', '#FFFFFF', '#8F3305', 4.5],
+  ['white on hero gradient end', '#FFFFFF', '#C4480C', 4.5],
+  ['sidebar text on sidebar', '#D9CDC6', '#2A1A14', 4.5],
+  ['white on sidebar', '#FFFFFF', '#2A1A14', 4.5],
+  ['white on primary (active nav)', '#FFFFFF', '#B8470A', 4.5],
   ['white on primary', '#FFFFFF', '#B8470A', 4.5],
   ['white on primary-hover', '#FFFFFF', '#9A3A06', 4.5],
   ['primary-text on surface', '#A83F06', '#FFFFFF', 4.5],
@@ -29,7 +34,7 @@ const pairs: [string, string, string, number][] = [
   ['warning icon on surface (UI)', '#B26B00', '#FFFFFF', 3],
   ['danger icon on surface (UI)', '#C42B1C', '#FFFFFF', 3],
   ['border-strong on surface (UI)', '#8C8175', '#FFFFFF', 3],
-  ['focus ring on canvas (UI)', '#1D4ED8', '#FBF7F0', 3],
+  ['focus ring on canvas (UI)', '#1D4ED8', '#F8F1E9', 3],
 ]
 let bad = 0
 for (const [name, fg, bg, min] of pairs) {

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, CircleCheck, LogIn, Users } from 'lucide-react'
 import { Page } from '@/components/ui/Page'
+import { Ring } from '@/components/ui/Ring'
+import { Hero } from '@/components/domain/Hero'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Progress } from '@/components/ui/Progress'
@@ -35,10 +37,10 @@ function Screen() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <header>
-        <p className="text-small font-semibold text-ink-secondary">{fmtLong(now.date)}</p>
-        <h1 className="text-h2 sm:text-h1">{hour < 720 ? 'Good morning' : hour < 1020 ? 'Good afternoon' : 'Good evening'}, {e.firstName}</h1>
-      </header>
+      <Hero eyebrow={fmtLong(now.date)} title={<>{hour < 720 ? 'Good morning' : hour < 1020 ? 'Good afternoon' : 'Good evening'}, {e.firstName}</>}
+        aside={tasks.length > 0 ? <Ring value={prog.done} max={prog.total} size={112} stroke={11} label={`${prog.done} of ${prog.total} tasks done`}><span className="font-display text-[1.9rem] font-semibold leading-none">{prog.done}<span className="text-body font-medium text-white/80">/{prog.total}</span></span><span className="mt-0.5 text-caption font-semibold text-white">tasks done</span></Ring> : undefined}>
+        {shift ? <>Your shift is {fmtTime(shift.start)} – {fmtTime(shift.end)}.</> : 'You’re not scheduled today.'}
+      </Hero>
 
       <Card className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-2">

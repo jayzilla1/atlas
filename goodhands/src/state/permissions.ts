@@ -2,7 +2,7 @@ import type { Role } from '@/types'
 
 /**
  * ROLE-BASED ACCESS, in one place.
- * Screens never ask "is this person Denise?" — they ask "can this role see financials?".
+ * Screens never ask "is this person Pamela?" — they ask "can this role see financials?".
  * To change who can do what (or add a Parent role later), you edit this table only.
  */
 export type Capability =

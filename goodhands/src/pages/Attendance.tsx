@@ -108,7 +108,7 @@ function AttendanceScreen() {
         <NoResults query={q} onClear={() => { setFilter('all'); setQ('') }} />
       ) : (
         <>
-          <Card padded={false} className="hidden overflow-visible lg:block">
+          <Card padded={false} className="hidden lg:block">
             <Table caption={`Attendance for ${fmtLong(date)}`}>
               <THead><TR><TH>Child</TH><TH>Status</TH><TH>Check-in</TH><TH>Check-out</TH><TH>Notes</TH><TH className="text-right"><span className="sr-only">Actions</span></TH></TR></THead>
               <tbody>{visible.map((r) => <DesktopRow key={r.child.id} r={r} date={date} />)}</tbody>

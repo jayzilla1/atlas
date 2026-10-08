@@ -14,6 +14,8 @@ export default {
       colors: {
         primary: { DEFAULT: v('primary'), hover: v('primary-hover'), subtle: v('primary-subtle'), 'subtle-hover': v('primary-subtle-hover'), text: v('primary-text'), on: v('on-primary') },
         canvas: v('canvas'),
+        sidebar: { DEFAULT: v('sidebar'), hover: v('sidebar-hover'), text: v('sidebar-text') },
+        sun: v('accent-sun'),
         surface: { DEFAULT: v('surface'), muted: v('surface-muted'), sunken: v('surface-sunken'), hover: v('surface-hover') },
         line: { DEFAULT: v('border'), subtle: v('border-subtle'), strong: v('border-strong') },
         ink: { DEFAULT: v('text-primary'), secondary: v('text-secondary'), tertiary: v('text-tertiary'), inverse: v('text-inverse') },
@@ -23,7 +25,7 @@ export default {
         info: { DEFAULT: v('info'), text: v('info-text'), bg: v('info-bg') },
         neutral: { DEFAULT: v('neutral'), text: v('neutral-text'), bg: v('neutral-bg') },
       },
-      fontFamily: { sans: v('font-sans') },
+      fontFamily: { sans: v('font-sans'), display: v('font-display') },
       fontSize: {
         caption: ['var(--text-caption)', { lineHeight: '1.25rem', letterSpacing: '0.01em' }],
         small: ['var(--text-small)', { lineHeight: '1.25rem' }],
@@ -34,7 +36,7 @@ export default {
         h1: ['var(--text-h1)', { lineHeight: '2.25rem', fontWeight: '700' }],
         display: ['var(--text-display)', { lineHeight: '1', fontWeight: '700' }],
       },
-      borderRadius: { sm: v('radius-sm'), md: v('radius-md'), lg: v('radius-lg'), full: v('radius-full') },
+      borderRadius: { sm: v('radius-sm'), md: v('radius-md'), lg: v('radius-lg'), xl: v('radius-xl'), full: v('radius-full') },
       boxShadow: { sm: v('shadow-sm'), md: v('shadow-md'), lg: v('shadow-lg') },
       transitionDuration: { fast: v('motion-fast'), base: v('motion-base'), slow: v('motion-slow') },
       transitionTimingFunction: { out: v('ease-out') },

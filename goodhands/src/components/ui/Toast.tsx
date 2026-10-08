@@ -21,7 +21,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <Ctx.Provider value={value}>
       {children}
-      <div className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--bottom-nav-height)+0.75rem)] z-[90] flex flex-col items-center gap-2 px-3 lg:bottom-6 lg:items-start lg:pl-[calc(var(--sidebar-width)+1.5rem)]" role="status" aria-live="polite" aria-atomic="false">
+      <div className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--bottom-nav-height)+0.75rem)] z-[90] flex flex-col items-center gap-2 px-3 lg:bottom-6 lg:items-start lg:pl-[calc(var(--sidebar-width)+2.5rem)]" role="status" aria-live="polite" aria-atomic="false">
         {items.map((t) => <ToastCard key={t.id} item={t} onDismiss={() => dismiss(t.id)} />)}
       </div>
     </Ctx.Provider>

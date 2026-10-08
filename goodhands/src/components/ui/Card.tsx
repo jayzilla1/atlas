@@ -3,7 +3,7 @@ import { cn } from '@/utils/cn'
 
 /** A bordered surface. Used sparingly — most grouping on a page is done with spacing and headings, not boxes. */
 export function Card({ as: Tag = 'div', padded = true, className, ...p }: { as?: ElementType; padded?: boolean } & HTMLAttributes<HTMLElement>) {
-  return <Tag className={cn('rounded-lg border border-line bg-surface', padded && 'p-4 sm:p-5', className)} {...p} />
+  return <Tag className={cn('rounded-lg border border-line bg-surface shadow-sm', padded ? 'p-4 sm:p-5' : 'overflow-hidden', className)} {...p} />
 }
 
 /** A titled region of a page: heading, optional helper text, optional actions on the right. */

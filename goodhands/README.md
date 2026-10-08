@@ -12,7 +12,7 @@ npm run check:contrast # verifies the colour tokens meet WCAG AA
 
 ## A 5-minute tour
 
-The prototype opens on **Wednesday, Oct 7, 10:12 AM** as the owner (Denise).
+The prototype opens on **Wednesday, Oct 7, 10:12 AM** as the owner (Pamela).
 
 1. **Home** — snapshot numbers, *Attention needed* (one prioritised list), today's attendance, reminders, upcoming, optional staff glance.
 2. **Attendance** — tap *Check in* (toast + Undo). Use ← / → or the calendar to browse history; correct a past day with ⋯ → *Edit times*. Tap a count (e.g. *Absent*) to filter.

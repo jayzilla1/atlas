@@ -1,7 +1,7 @@
 import { useSession } from '@/state/session'
 import { useData } from '@/state/store'
 
-/** Who is doing things right now — recorded as "by Denise" on notifications, supply updates, etc. */
+/** Who is doing things right now — recorded as "by Pamela" on notifications, supply updates, etc. */
 export function useActor() {
   const { session, role } = useSession()
   const d = useData()

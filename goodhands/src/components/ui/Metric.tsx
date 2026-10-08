@@ -11,7 +11,7 @@ export function Metric({ label, value, hint, tone = 'neutral', icon, onClick, pr
       <span className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-ink-secondary">
         {icon && <span aria-hidden className={cn('[&>svg]:h-3.5 [&>svg]:w-3.5', toneText[tone])}>{icon}</span>}{label}
       </span>
-      <span className={cn('mt-1 block text-display tabular-nums', toneText[tone])}>{value}</span>
+      <span className={cn('mt-1 block font-display text-display tabular-nums', toneText[tone])}>{value}</span>
       {hint && <span className="mt-1 block text-caption text-ink-secondary">{hint}</span>}
     </>
   )

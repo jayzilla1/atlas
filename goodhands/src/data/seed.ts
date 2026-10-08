@@ -225,7 +225,7 @@ routine('maria', [
   ['10:30', 'Prepare snack', 'Theo has a peanut allergy — check every label. Zoe is out today.'],
   ['11:30', 'Prepare lunch area'],
   ['12:30', 'Fold blankets and set up nap area'],
-  ['14:00', 'Check diaper and wipes stock', 'Wipes are running low — tell Denise what is left.'],
+  ['14:00', 'Check diaper and wipes stock', 'Wipes are running low — tell Pamela what is left.'],
   ['15:15', 'Classroom reset'],
   ['15:25', 'Complete end-of-day closeout'],
 ])
@@ -255,9 +255,9 @@ const supplies: Supply[] = [
   { id: 'cleaning', name: 'Cleaning supplies', status: 'good', updatedOn: '2026-09-30' },
 ]
 const supplyEvents: SupplyEvent[] = [
-  { id: 'se-1', supplyId: 'gloves', date: '2026-09-18', kind: 'restocked', to: 'good', by: 'Denise' },
-  { id: 'se-2', supplyId: 'wipes', date: '2026-09-25', kind: 'restocked', to: 'good', by: 'Denise' },
-  { id: 'se-3', supplyId: 'cleaning', date: '2026-09-30', kind: 'restocked', to: 'good', by: 'Denise' },
+  { id: 'se-1', supplyId: 'gloves', date: '2026-09-18', kind: 'restocked', to: 'good', by: 'Pamela' },
+  { id: 'se-2', supplyId: 'wipes', date: '2026-09-25', kind: 'restocked', to: 'good', by: 'Pamela' },
+  { id: 'se-3', supplyId: 'cleaning', date: '2026-09-30', kind: 'restocked', to: 'good', by: 'Pamela' },
   { id: 'se-4', supplyId: 'paper-towels', date: '2026-10-01', kind: 'restocked', to: 'good', by: 'Maria' },
   { id: 'se-5', supplyId: 'wipes', date: '2026-10-05', kind: 'status', to: 'low', by: 'Maria' },
   { id: 'se-6', supplyId: 'gloves', date: '2026-10-06', kind: 'status', to: 'restock', by: 'Taylor' },
@@ -317,9 +317,9 @@ export function createSeed(): AppData {
     blankets,
     documents,
     notices: [
-      { id: 'n-1', childId: 'leo', kind: 'diapers_low', date: '2026-10-01', time: '15:40', by: 'Denise', message: 'Hi Elena — Leo is running low on diapers. Could you bring more tomorrow?', channel: 'simulated_text' },
+      { id: 'n-1', childId: 'leo', kind: 'diapers_low', date: '2026-10-01', time: '15:40', by: 'Pamela', message: 'Hi Elena — Leo is running low on diapers. Could you bring more tomorrow?', channel: 'simulated_text' },
       { id: 'n-2', childId: 'isla', kind: 'diapers_low', date: '2026-09-28', time: '16:05', by: 'Maria', message: 'Hi Lucia — Isla is running low on diapers. Could you bring more tomorrow?', channel: 'simulated_text' },
     ],
-    settings: { daycareName: 'GoodHands Home Daycare', ownerName: 'Denise Carter', graceMinutes: 15, blanketLeadDays: 2, closeoutNudgeMinutes: 45, showStaffOnHome: true },
+    settings: { daycareName: 'GoodHands Home Daycare', ownerName: 'Pamela Williams', graceMinutes: 15, blanketLeadDays: 2, closeoutNudgeMinutes: 45, showStaffOnHome: true },
   }
 }
