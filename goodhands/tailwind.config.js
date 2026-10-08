@@ -31,7 +31,7 @@ export default {
         small: ['var(--text-small)', { lineHeight: '1.25rem' }],
         body: ['var(--text-body)', { lineHeight: '1.5rem' }],
         lead: ['var(--text-lead)', { lineHeight: '1.75rem' }],
-        h3: ['var(--text-h3)', { lineHeight: '1.75rem', fontWeight: '650' }],
+        h3: ['var(--text-h3)', { lineHeight: '1.75rem', fontWeight: '600' }],
         h2: ['var(--text-h2)', { lineHeight: '2rem', fontWeight: '700' }],
         h1: ['var(--text-h1)', { lineHeight: '2.25rem', fontWeight: '700' }],
         display: ['var(--text-display)', { lineHeight: '1', fontWeight: '700' }],

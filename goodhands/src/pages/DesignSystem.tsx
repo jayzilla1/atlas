@@ -68,7 +68,7 @@ export default function DesignSystem() {
           <Card padded={false}><Table caption="Colour contrast checks"><THead><TR><TH>Pair</TH><TH>Sample</TH><TH align="right">Ratio</TH><TH>Result</TH></TR></THead>
             <tbody>{PAIRS.map(([label, fg, bg, min]) => { const r = colors[fg] && colors[bg] ? contrast(colors[fg], colors[bg]) : 0; return <TR key={label}><TD>{label}</TD><TD><span className="rounded px-2 py-0.5 text-small font-semibold" style={{ color: `var(${fg})`, background: `var(${bg})` }}>Aa</span></TD><TD align="right">{r.toFixed(2)}:1</TD><TD>{r >= min ? <Badge tone="success">Passes {min}:1</Badge> : <Badge tone="danger">Below {min}:1</Badge>}</TD></TR> })}</tbody></Table></Card>
         </Sub>
-        <Sub title="Typography" note="Plus Jakarta Sans for the interface (clear, modern, friendly) and Fraunces, a soft warm serif, for titles and big numbers — the GoodHands voice.">
+        <Sub title="Typography" note="Poppins — a modern, geometric sans-serif — throughout: regular and medium for reading, semibold and bold for titles and big numbers.">
           <Card className="divide-y divide-line-subtle !p-0">{TYPE.map(([n, cls, spec, sample]) => <div key={n} className="flex flex-wrap items-baseline gap-x-6 gap-y-1 px-5 py-3"><span className="w-20 text-caption font-semibold text-ink-secondary">{n}</span><span className={cls}>{sample}</span><span className="ml-auto font-mono text-caption text-ink-tertiary">{spec}</span></div>)}</Card>
         </Sub>
         <div className="grid gap-8 lg:grid-cols-3">

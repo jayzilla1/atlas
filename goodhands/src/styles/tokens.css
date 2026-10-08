@@ -97,8 +97,8 @@
   --focus-ring: var(--p-focus);
 
   /* ===== TYPOGRAPHY ======================================================== */
-  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
   /* size / line-height pairs. rem so users' browser text-size settings are respected */
   --text-caption: 0.75rem;     /* 12 – labels, meta */
   --text-small: 0.875rem;      /* 14 – table cells, secondary */
