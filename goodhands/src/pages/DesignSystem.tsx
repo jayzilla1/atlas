@@ -100,7 +100,7 @@ export default function DesignSystem() {
           <div className="flex flex-wrap gap-2"><CloseoutBadge status="not_started" /><CloseoutBadge status="in_progress" /><CloseoutBadge status="ready" /><CloseoutBadge status="completed" /></div>
         </Card></Sub>
         <Sub title="Avatars, tooltip, menu, tabs"><Card className="space-y-5">
-          <div className="flex items-center gap-3">{[0, 1, 2, 3, 4].map((i) => <Avatar key={i} first={['Amari', 'Jordan', 'Maya', 'Noah', 'Priya'][i]} last="X" tint={i} />)}<Avatar first="Maya" last="J" size="lg" /><Tooltip label="Tooltips appear on hover and focus"><Button>Hover or focus me</Button></Tooltip>
+          <div className="flex flex-wrap items-center gap-3">{[0, 1, 2, 3, 4].map((i) => <Avatar key={i} first={['Amari', 'Jordan', 'Maya', 'Noah', 'Priya'][i]} last="X" tint={i} />)}<Avatar first="Maya" last="J" size="lg" /><Tooltip label="Tooltips appear on hover and focus"><Button>Hover or focus me</Button></Tooltip>
             <Menu label="Example menu" trigger={(p) => <Button {...p} iconAfter={<MoreHorizontal className="h-4 w-4" />}>Menu</Button>} items={[{ label: 'Edit', onSelect: () => {} }, { label: 'Duplicate', onSelect: () => {} }, { label: 'Delete', icon: <Trash2 />, danger: true, separatorBefore: true, onSelect: () => {} }]} /></div>
           <Tabs label="Example tabs" value={tab} onChange={setTab} items={[{ id: 'a', label: 'Overview' }, { id: 'b', label: 'Health', count: 2 }, { id: 'c', label: 'Documents' }]} />
           <Segmented label="Example filter" value={seg} onChange={setSeg} items={[{ id: 'x', label: 'All', count: 9 }, { id: 'y', label: 'Present', count: 6 }, { id: 'z', label: 'Absent', count: 1 }]} />
@@ -136,4 +136,4 @@ export default function DesignSystem() {
   )
 }
 function Block({ id, title, children }: { id: string; title: string; children: React.ReactNode }) { return <section id={id} className="mb-14 scroll-mt-20"><h2 className="mb-5 border-b border-line pb-2 text-h2">{title}</h2><div className="space-y-8">{children}</div></section> }
-function Sub({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) { return <div><h3 className="text-lead font-semibold">{title}</h3>{note && <p className="mb-3 text-small text-ink-secondary">{note}</p>}{!note && <div className="mb-3" />}{children}</div> }
+function Sub({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) { return <div><h3 className="text-lead font-semibold">{title}</h3>{note && <p className="mb-3 text-small text-ink-secondary">{note}</p>}{!note && <div className="mb-3" />}<div className="min-w-0 overflow-x-auto">{children}</div></div> }
