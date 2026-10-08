@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { Bell, Check, FlaskConical, MoreHorizontal, Palette, Sparkles, UserRound } from 'lucide-react'
+import { Bell, Check, FlaskConical, MoreHorizontal, Palette, UserRound } from 'lucide-react'
 import { Wordmark } from './Logo'
 import { NavIcon } from './NavIcon'
 import { DemoPanel } from './DemoPanel'
 import { Menu } from '@/components/ui/Menu'
 import { Avatar } from '@/components/ui/Avatar'
-import { Button, IconButton } from '@/components/ui/Button'
+import { IconButton } from '@/components/ui/Button'
 import { Drawer } from '@/components/ui/Dialog'
 import { AttentionList } from '@/components/domain/Attention'
 import { AssistantDrawer } from '@/ai/AssistantDrawer'
-import { useAssistant } from '@/ai/AssistantContext'
+import { AssistantBubble } from '@/ai/AssistantBubble'
 import { useSession } from '@/state/session'
 import { useData } from '@/state/store'
 import { OWNER_NAV, STAFF_NAV } from '@/state/permissions'
@@ -27,7 +27,6 @@ export function AppShell() {
   const loc = useLocation()
   const first = useRef(true)
   const [demoOpen, setDemoOpen] = useState(false)
-  const { openAssistant } = useAssistant()
   const [moreOpen, setMoreOpen] = useState(false)
 
   // After navigating, move keyboard/screen-reader focus to the new page and update the tab title.
@@ -55,13 +54,6 @@ export function AppShell() {
             ))}
           </ul>
         </nav>
-        {role === 'owner' && (
-          <div className="mx-4 mb-3 rounded-lg bg-white/10 p-4">
-            <p className="flex items-center gap-2 text-small font-bold text-white"><Sparkles className="h-4 w-4 text-sun" aria-hidden />Ask GoodHands</p>
-            <p className="mt-1 text-caption text-sidebar-text">“Who hasn’t paid?” “What needs restocking?”</p>
-            <button type="button" onClick={() => openAssistant()} className="mt-3 min-h-9 w-full rounded-md bg-white px-3 text-small font-bold text-ink transition-colors duration-fast hover:bg-primary-subtle">Open assistant</button>
-          </div>
-        )}
         <div className="border-t border-white/10 p-4">
           <Link to="/design-system" className={cn(linkBase, 'rounded-lg text-sidebar-text hover:bg-sidebar-hover hover:text-white')}><Palette className="h-5 w-5" aria-hidden />Design system</Link>
           <button type="button" onClick={() => setDemoOpen(true)} className={cn(linkBase, 'w-full rounded-lg text-sidebar-text hover:bg-sidebar-hover hover:text-white')}><FlaskConical className="h-5 w-5" aria-hidden />Demo controls</button>
@@ -109,7 +101,7 @@ export function AppShell() {
       </Drawer>
 
       <DemoPanel open={demoOpen} onClose={() => setDemoOpen(false)} />
-      {role === 'owner' && <AssistantDrawer />}
+      {role === 'owner' && <><AssistantDrawer /><AssistantBubble /></>}
       <p className="sr-only" aria-live="polite">{fmtLong(now.date)}</p>
     </div>
   )
@@ -119,7 +111,6 @@ function TopBar({ onDemo }: { onDemo: () => void }) {
   const { role, now, session, setSession } = useSession()
   const d = useData()
   const nav = useNavigate()
-  const { openAssistant } = useAssistant()
   const emp = d.employees.find((e) => e.id === session.employeeId)
   const name = role === 'owner' ? OWNER.name : emp ? `${emp.firstName} ${emp.lastName}` : 'Staff'
   const [bell, setBell] = useState(false)
@@ -137,8 +128,6 @@ function TopBar({ onDemo }: { onDemo: () => void }) {
       <p className="hidden text-small font-semibold tabular-nums text-ink-secondary sm:block">{fmtLong(now.date)} · {fmtTime(now.time)}</p>
       {role === 'owner' && (
         <>
-          <Button variant="subtle" size="md" icon={<Sparkles className="h-4 w-4" />} onClick={() => openAssistant()} className="hidden sm:inline-flex">Ask GoodHands</Button>
-          <IconButton label="Ask GoodHands" onClick={() => openAssistant()} className="sm:hidden" variant="subtle"><Sparkles className="h-5 w-5" /></IconButton>
           <div className="relative">
             <IconButton label={items.length ? `Notifications, ${items.length} need attention` : 'Notifications, nothing needs attention'} onClick={() => setBell(true)}>
               <span className="relative"><Bell className="h-5 w-5" />{items.length > 0 && <span aria-hidden className="absolute -right-1.5 -top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[0.625rem] font-bold text-primary-on">{items.length}</span>}</span>
