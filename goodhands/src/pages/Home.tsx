@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarClock, ChevronDown, CircleCheck, Hourglass, Plane, Sparkles, UserCheck, UserX, Users } from 'lucide-react'
 import { Page } from '@/components/ui/Page'
 import { Ring } from '@/components/ui/Ring'
+import { Metric } from '@/components/ui/Metric'
 import { Hero } from '@/components/domain/Hero'
 import { Card, Section } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -52,7 +53,7 @@ function HomeScreen() {
         eyebrow={fmtLong(now.date)}
         title={<>{greeting(now.time)}, {d.settings.ownerName.split(' ')[0]}</>}
         actions={<>
-          <Button size="lg" onClick={() => openAssistant('What do I need to know today?')} icon={<Sparkles className="h-4 w-4" />} className="!bg-white !text-ink hover:!bg-primary-subtle">What do I need to know today?</Button>
+          <Button size="lg" onClick={() => openAssistant('What do I need to know today?')} icon={<Sparkles className="h-4 w-4" />} className="!h-auto w-full !bg-white !py-3 text-center !text-ink hover:!bg-primary-subtle sm:w-auto">What do I need to know today?</Button>
           <Link to="/attendance"><Button size="lg" className="!border-white/60 !bg-transparent !text-white hover:!bg-white/15">Open Attendance</Button></Link>
         </>}
         aside={
@@ -70,11 +71,11 @@ function HomeScreen() {
       <section aria-labelledby="snap" className="mb-8 mt-5">
         <h2 id="snap" className="sr-only">Today’s snapshot</h2>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          <Tile label="Expected" value={s.expected} icon={<Users />} tint="bg-primary-subtle text-primary-text" hint={s.vacation ? `${s.vacation} on vacation not counted` : undefined} />
-          <Tile label="Present" value={s.inCare + s.checkedOut} icon={<UserCheck />} tint="bg-success-bg text-success-text" hint={s.late ? `${s.late} arrived late` : undefined} />
-          <Tile label="Not arrived" value={s.notArrived} icon={<Hourglass />} tint="bg-warning-bg text-warning-text" />
-          <Tile label="Absent" value={s.absent} icon={<UserX />} tint="bg-danger-bg text-danger-text" />
-          <Tile label="Vacation" value={s.vacation} icon={<Plane />} tint="bg-info-bg text-info-text" />
+          <li><Metric label="Expected" value={s.expected} icon={<Users />} hint={s.vacation ? `${s.vacation} on vacation not counted` : undefined} /></li>
+          <li><Metric label="Present" value={s.inCare + s.checkedOut} icon={<UserCheck />} hint={s.late ? `${s.late} arrived late` : undefined} /></li>
+          <li><Metric label="Not arrived" value={s.notArrived} icon={<Hourglass />} tone={s.notArrived > 0 ? 'warning' : 'neutral'} /></li>
+          <li><Metric label="Absent" value={s.absent} icon={<UserX />} /></li>
+          <li><Metric label="Vacation" value={s.vacation} icon={<Plane />} /></li>
         </ul>
       </section>
 
@@ -194,19 +195,6 @@ function HomeScreen() {
         </aside>
       </div>
     </div>
-  )
-}
-
-function Tile({ label, value, icon, tint, hint }: { label: string; value: number; icon: React.ReactNode; tint: string; hint?: string }) {
-  return (
-    <li className={cn('rounded-lg p-4', tint)}>
-      <div className="flex items-center justify-between">
-        <p className="text-caption font-bold uppercase tracking-wide">{label}</p>
-        <span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 [&>svg]:h-[1.1rem] [&>svg]:w-[1.1rem]">{icon}</span>
-      </div>
-      <p className="mt-2 font-display text-display tabular-nums">{value}</p>
-      {hint && <p className="mt-1 text-caption font-medium">{hint}</p>}
-    </li>
   )
 }
 

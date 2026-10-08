@@ -6,8 +6,8 @@ const tones: Record<Tone, string> = {
   neutral: 'bg-neutral-bg text-neutral-text',
   success: 'bg-success-bg text-success-text',
   warning: 'bg-warning-bg text-warning-text',
-  danger: 'bg-danger-bg text-danger-text',
-  info: 'bg-info-bg text-info-text',
+  danger: 'bg-primary text-primary-on',
+  info: 'bg-surface text-info-text ring-1 ring-inset ring-line-strong/40',
   primary: 'bg-primary-subtle text-primary-text',
 }
 export const toneIconColor: Record<Tone, string> = {

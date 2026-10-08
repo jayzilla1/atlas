@@ -9,7 +9,7 @@ export function Hero({ eyebrow, title, children, actions, aside }: { eyebrow: Re
   return (
     <section className="relative isolate overflow-hidden rounded-xl bg-[linear-gradient(115deg,var(--hero-from),var(--hero-to))] p-6 text-white shadow-md sm:p-8">
       <span aria-hidden className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-white/10" />
-      <span aria-hidden className="pointer-events-none absolute -bottom-24 right-24 h-56 w-56 rounded-full bg-sun/20" />
+      <span aria-hidden className="pointer-events-none absolute -bottom-24 right-24 h-56 w-56 rounded-full bg-white/10" />
       <span aria-hidden className="pointer-events-none absolute left-1/3 top-0 h-24 w-24 rounded-full bg-white/5" />
       <div className="relative flex flex-wrap items-center justify-between gap-x-8 gap-y-6">
         <div className="min-w-0 max-w-xl">

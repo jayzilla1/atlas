@@ -18,7 +18,7 @@ export function AssistantBubble() {
     >
       <span className="relative flex h-6 w-6 shrink-0 items-center justify-center">
         <MessageCircle className="h-6 w-6" aria-hidden />
-        <Sparkles className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5 text-sun" aria-hidden />
+        <Sparkles className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5 text-white/90" aria-hidden />
       </span>
       <span className="max-w-0 overflow-hidden whitespace-nowrap text-small font-semibold opacity-0 transition-all duration-base ease-out group-hover:ml-2.5 group-hover:max-w-[9rem] group-hover:opacity-100 group-focus-visible:ml-2.5 group-focus-visible:max-w-[9rem] group-focus-visible:opacity-100">Ask GoodHands</span>
     </button>

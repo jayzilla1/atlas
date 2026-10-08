@@ -40,8 +40,10 @@ export interface Child {
   firstName: string
   lastName: string
   dob: ISODate
-  /** Avatar tint (index into a small palette). Real photos would replace this. */
-  tint: number
+  /** Optional photo, e.g. '/avatars/maya.jpg' (file in public/avatars). Falls back to initials. */
+  photo?: string
+  /** Legacy, unused by the neutral avatar. */
+  tint?: number
   guardians: Guardian[]
   address: string
   emergencyContact?: EmergencyContact
@@ -111,7 +113,8 @@ export interface Employee {
   address: string
   emergencyContact: EmergencyContact
   hiredOn: ISODate
-  tint: number
+  photo?: string
+  tint?: number
   /** weekday → shift. Missing weekday = not scheduled. */
   weekly: Partial<Record<number, { start: Clock; end: Clock }>>
 }

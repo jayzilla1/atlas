@@ -60,9 +60,9 @@ function Screen() {
           </div>
         } />
 
-      <div role="group" aria-label="Payment summary" className="mb-6 grid grid-cols-2 gap-y-4 border-y border-line py-4 sm:grid-cols-5">
+      <div role="group" aria-label="Payment summary" className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <Metric label="Enrolled" value={sum.enrolled} />
-        <Metric label="Paid" value={sum.paid} tone="success" />
+        <Metric label="Paid" value={sum.paid} />
         <Metric label="Due" value={sum.due} tone={sum.due ? 'warning' : 'neutral'} />
         <Metric label="Overdue" value={sum.overdue} tone={sum.overdue ? 'danger' : 'neutral'} />
         <Metric label="Still to collect" value={money(sum.outstanding)} hint={`${money(sum.collected)} collected`} />

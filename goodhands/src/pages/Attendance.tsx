@@ -89,12 +89,12 @@ function AttendanceScreen() {
       )}
 
       {/* The status counts double as filters: tap one to see only those children. */}
-      <div className="-mx-1 mb-4 mt-3 grid grid-cols-3 gap-1 sm:grid-cols-5" role="group" aria-label="Filter by status">
-        <Metric label="Present" value={s.inCare} tone="success" pressed={filter === 'present'} onClick={() => setFilter(filter === 'present' ? 'all' : 'present')} className="[&_.text-display]:text-h1 sm:[&_.text-display]:text-display" />
-        <Metric label="Not arrived" value={s.notArrived} tone={s.notArrived && isToday ? 'warning' : 'neutral'} pressed={filter === 'expected'} onClick={() => setFilter(filter === 'expected' ? 'all' : 'expected')} className="[&_.text-display]:text-h1 sm:[&_.text-display]:text-display" />
-        <Metric label="Absent" value={s.absent} tone={s.absent ? 'danger' : 'neutral'} pressed={filter === 'absent'} onClick={() => setFilter(filter === 'absent' ? 'all' : 'absent')} className="[&_.text-display]:text-h1 sm:[&_.text-display]:text-display" />
-        <Metric label="Vacation" value={s.vacation} pressed={filter === 'vacation'} onClick={() => setFilter(filter === 'vacation' ? 'all' : 'vacation')} className="[&_.text-display]:text-h1 sm:[&_.text-display]:text-display" />
-        <Metric label="Checked out" value={s.checkedOut} pressed={filter === 'checked_out'} onClick={() => setFilter(filter === 'checked_out' ? 'all' : 'checked_out')} className="[&_.text-display]:text-h1 sm:[&_.text-display]:text-display" />
+      <div className="mb-4 mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5" role="group" aria-label="Filter by status">
+        <Metric label="Present" value={s.inCare} pressed={filter === 'present'} onClick={() => setFilter(filter === 'present' ? 'all' : 'present')} />
+        <Metric label="Not arrived" value={s.notArrived} tone={s.notArrived && isToday ? 'warning' : 'neutral'} pressed={filter === 'expected'} onClick={() => setFilter(filter === 'expected' ? 'all' : 'expected')} />
+        <Metric label="Absent" value={s.absent} pressed={filter === 'absent'} onClick={() => setFilter(filter === 'absent' ? 'all' : 'absent')} />
+        <Metric label="Vacation" value={s.vacation} pressed={filter === 'vacation'} onClick={() => setFilter(filter === 'vacation' ? 'all' : 'vacation')} />
+        <Metric label="Checked out" value={s.checkedOut} pressed={filter === 'checked_out'} onClick={() => setFilter(filter === 'checked_out' ? 'all' : 'checked_out')} />
       </div>
 
       <div className="mb-3 flex flex-wrap items-center gap-3">

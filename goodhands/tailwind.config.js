@@ -14,8 +14,6 @@ export default {
       colors: {
         primary: { DEFAULT: v('primary'), hover: v('primary-hover'), subtle: v('primary-subtle'), 'subtle-hover': v('primary-subtle-hover'), text: v('primary-text'), on: v('on-primary') },
         canvas: v('canvas'),
-        sidebar: { DEFAULT: v('sidebar'), hover: v('sidebar-hover'), text: v('sidebar-text') },
-        sun: v('accent-sun'),
         surface: { DEFAULT: v('surface'), muted: v('surface-muted'), sunken: v('surface-sunken'), hover: v('surface-hover') },
         line: { DEFAULT: v('border'), subtle: v('border-subtle'), strong: v('border-strong') },
         ink: { DEFAULT: v('text-primary'), secondary: v('text-secondary'), tertiary: v('text-tertiary'), inverse: v('text-inverse') },

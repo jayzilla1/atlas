@@ -62,7 +62,7 @@ function Screen() {
               <tbody>
                 {shown.map(({ c, g, view, issues }) => (
                   <TR key={c.id} className="hover:bg-surface-muted">
-                    <TD><Link to={`/children/${c.id}`} className="group flex items-center gap-3 rounded"><Avatar first={c.firstName} last={c.lastName} tint={c.tint} /><span><span className="block font-semibold group-hover:underline">{childName(c)}</span><span className="text-caption text-ink-secondary">{fmtAge(c.dob, now.date)}</span></span></Link></TD>
+                    <TD><Link to={`/children/${c.id}`} className="group flex items-center gap-3 rounded"><Avatar first={c.firstName} last={c.lastName} src={c.photo} /><span><span className="block font-semibold group-hover:underline">{childName(c)}</span><span className="text-caption text-ink-secondary">{fmtAge(c.dob, now.date)}</span></span></Link></TD>
                     <TD><p>{g.name}</p><p className="text-caption text-ink-secondary">{g.phone}</p></TD>
                     <TD><AttendanceBadge view={view} size="sm" /></TD>
                     <TD>{c.diaper ? <DiaperBadge status={c.diaper.status} notified={!!c.diaper.notified} /> : <span className="text-ink-tertiary">—</span>}</TD>
@@ -77,7 +77,7 @@ function Screen() {
             {shown.map(({ c, g, view, issues }) => (
               <li key={c.id}>
                 <Link to={`/children/${c.id}`} className="block rounded-lg border border-line bg-surface p-3.5 transition-colors duration-fast hover:bg-surface-muted">
-                  <div className="flex items-center gap-3"><Avatar first={c.firstName} last={c.lastName} tint={c.tint} /><div className="min-w-0 flex-1"><p className="font-semibold">{childName(c)}</p><p className="text-caption text-ink-secondary">{fmtAge(c.dob, now.date)} · {g.name}</p></div><ChevronRight className="h-5 w-5 text-ink-tertiary" aria-hidden /></div>
+                  <div className="flex items-center gap-3"><Avatar first={c.firstName} last={c.lastName} src={c.photo} /><div className="min-w-0 flex-1"><p className="font-semibold">{childName(c)}</p><p className="text-caption text-ink-secondary">{fmtAge(c.dob, now.date)} · {g.name}</p></div><ChevronRight className="h-5 w-5 text-ink-tertiary" aria-hidden /></div>
                   <div className="mt-2.5 flex flex-wrap gap-1.5"><AttendanceBadge view={view} size="sm" />{c.diaper && c.diaper.status !== 'good' && <DiaperBadge status={c.diaper.status} />}{issues.length > 0 && <Badge tone="warning" icon={<AlertTriangle />}>{issues.length} to fix</Badge>}</div>
                 </Link>
               </li>

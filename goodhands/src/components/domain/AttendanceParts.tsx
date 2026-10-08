@@ -24,7 +24,7 @@ export function ChildCell({ child, date, compact }: { child: Child; date: string
   )
   return (
     <div className="flex min-w-0 items-center gap-3">
-      <Avatar first={child.firstName} last={child.lastName} tint={child.tint} size={compact ? 'sm' : 'md'} />
+      <Avatar first={child.firstName} last={child.lastName} src={child.photo} size={compact ? 'sm' : 'md'} />
       <div className="min-w-0">
         {can(role, 'full_child_records')
           ? <Link to={`/children/${child.id}`} className="group rounded">{name}</Link>

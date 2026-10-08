@@ -11,40 +11,25 @@
 
 :root {
   /* ===== 1. PRIMITIVES ===================================================== */
+  /* ONE brand hue (orange) + a neutral grey scale. That's the whole palette. */
   --p-orange-50: #fff6ee;
   --p-orange-100: #fdebdd;
   --p-orange-200: #f9d2b2;
-  --p-orange-400: #ee8a3c;
+  --p-orange-300: #fbdcc8;
   --p-orange-600: #b8470a;
   --p-orange-700: #9a3a06;
   --p-orange-800: #a83f06;
-  --p-cream-50: #fdfbf7;
-  --p-cream-100: #fbf7f0;
-  --p-cream-200: #f3ede3;
-  --p-cream-300: #e8dfd2;
-  --p-stone-100: #efe9e1;
-  --p-stone-400: #b9afa3;
-  --p-stone-500: #8c8175;
-  --p-stone-600: #6f655c;
-  --p-stone-700: #5c534b;
-  --p-stone-800: #4a423b;
-  --p-charcoal: #2a2420;
-  --p-green-100: #e3f1e8;
-  --p-green-500: #2e7d55;
-  --p-green-700: #1f5c3f;
-  --p-amber-100: #fff0cc;
-  --p-amber-500: #b26b00;
-  --p-amber-700: #7a4f00;
-  --p-red-100: #fce6e3;
-  --p-red-500: #c42b1c;
-  --p-red-700: #a52114;
-  --p-blue-100: #e3eef8;
-  --p-blue-500: #2f6fa8;
-  --p-blue-700: #1f5483;
-  --p-focus: #1d4ed8;
-  --p-espresso: #2a1a14;
-  --p-espresso-2: #3a2620;
-  --p-sun: #f6b84b;
+  --p-orange-900: #8f3305;
+  --p-gray-50: #fafafb;
+  --p-gray-100: #f4f4f6;
+  --p-gray-200: #ececef;
+  --p-gray-300: #e1e1e6;
+  --p-gray-400: #b8b8c0;
+  --p-gray-500: #8a8a93;
+  --p-gray-600: #62626a;
+  --p-gray-700: #55555c;
+  --p-gray-800: #3a3a40;
+  --p-gray-900: #1f1f23;
 
   /* ===== 2. SEMANTIC COLOUR ================================================ */
   /* brand / action */
@@ -54,47 +39,51 @@
   --primary-subtle-hover: var(--p-orange-200);
   --primary-text: var(--p-orange-800);
   --on-primary: #ffffff;
-  /* surfaces */
-  /* the app 'frame' (the floating rounded window) and the colourful backdrop behind it */
-  --canvas: #f8f1e9;
-  --backdrop: #f3e2d3;
-  --sidebar: var(--p-espresso);
-  --sidebar-hover: rgb(255 255 255 / 0.1);
-  --sidebar-text: #d9cdc6;
-  --accent-sun: var(--p-sun);
-  --hero-from: #8f3305;
+  --hero-from: var(--p-orange-900);
   --hero-to: #c4480c;
+  /* surfaces — a soft grey backdrop, a frosted-glass frame, white cards */
+  --backdrop: #e4e5e9;
+  --canvas: var(--p-gray-100);
   --surface: #ffffff;
-  --surface-muted: var(--p-cream-50);
-  --surface-sunken: var(--p-cream-200);
-  --surface-hover: var(--p-cream-100);
-  --overlay-scrim: rgb(42 36 32 / 0.45);
+  --surface-muted: var(--p-gray-50);
+  --surface-sunken: var(--p-gray-200);
+  --surface-hover: var(--p-gray-100);
+  --glass-bg: rgb(255 255 255 / 0.68);
+  --glass-bg-strong: rgb(255 255 255 / 0.82);
+  --glass-border: rgb(255 255 255 / 0.9);
+  --overlay-scrim: rgb(31 31 35 / 0.45);
   /* text */
-  --text-primary: var(--p-charcoal);
-  --text-secondary: var(--p-stone-700);
-  --text-tertiary: var(--p-stone-600);
+  --text-primary: var(--p-gray-900);
+  --text-secondary: var(--p-gray-700);
+  --text-tertiary: var(--p-gray-600);
   --text-inverse: #ffffff;
   /* borders */
-  --border: #eadfd3;
-  --border-subtle: var(--p-cream-200);
-  --border-strong: var(--p-stone-500);
-  /* status – every status has a strong colour for icons, a text colour and a soft background */
-  --success: var(--p-green-500);
-  --success-text: var(--p-green-700);
-  --success-bg: var(--p-green-100);
-  --warning: var(--p-amber-500);
-  --warning-text: var(--p-amber-700);
-  --warning-bg: var(--p-amber-100);
-  --danger: var(--p-red-500);
-  --danger-text: var(--p-red-700);
-  --danger-bg: var(--p-red-100);
-  --info: var(--p-blue-500);
-  --info-text: var(--p-blue-700);
-  --info-bg: var(--p-blue-100);
-  --neutral: var(--p-stone-600);
-  --neutral-text: var(--p-stone-800);
-  --neutral-bg: var(--p-stone-100);
-  --focus-ring: var(--p-focus);
+  --border: var(--p-gray-300);
+  --border-subtle: var(--p-gray-200);
+  --border-strong: var(--p-gray-500);
+  /*
+   * STATUS = INTENSITY, NOT HUE. Only orange draws the eye, so orange always means "look here".
+   *   success / info / neutral → quiet greys   (all is well, or just information)
+   *   warning                  → soft orange   (needs attention soon)
+   *   danger                   → solid orange  (needs action now)
+   * Every status also carries an icon and a word, so none depends on colour alone.
+   */
+  --success: var(--p-gray-700);
+  --success-text: var(--p-gray-800);
+  --success-bg: var(--p-gray-200);
+  --warning: var(--p-orange-600);
+  --warning-text: var(--p-orange-900);
+  --warning-bg: var(--p-orange-100);
+  --danger: var(--p-orange-600);
+  --danger-text: var(--p-orange-800);
+  --danger-bg: var(--p-orange-300);
+  --info: var(--p-gray-600);
+  --info-text: var(--p-gray-800);
+  --info-bg: var(--p-gray-100);
+  --neutral: var(--p-gray-600);
+  --neutral-text: var(--p-gray-800);
+  --neutral-bg: var(--p-gray-200);
+  --focus-ring: var(--p-gray-900);
 
   /* ===== TYPOGRAPHY ======================================================== */
   --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -129,9 +118,9 @@
   --radius-full: 999px;
 
   /* ===== ELEVATION – borders do most of the work, shadows are quiet ======= */
-  --shadow-sm: 0 1px 2px rgb(60 30 10 / 0.05), 0 4px 14px rgb(60 30 10 / 0.04);
-  --shadow-md: 0 6px 18px rgb(60 30 10 / 0.1);
-  --shadow-lg: 0 18px 48px rgb(60 30 10 / 0.18);
+  --shadow-sm: 0 1px 2px rgb(20 20 30 / 0.04), 0 6px 20px rgb(20 20 30 / 0.05);
+  --shadow-md: 0 8px 24px rgb(20 20 30 / 0.1);
+  --shadow-lg: 0 24px 60px rgb(20 20 30 / 0.16);
 
   /* ===== MOTION =========================================================== */
   --motion-fast: 120ms;
@@ -140,7 +129,7 @@
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* ===== LAYOUT =========================================================== */
-  --sidebar-width: 16rem;
+  --sidebar-width: 17rem;
   --content-max: 76rem;
   --bottom-nav-height: 4rem;
   --control-height: 2.5rem;

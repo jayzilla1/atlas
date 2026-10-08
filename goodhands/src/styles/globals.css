@@ -11,7 +11,6 @@
   html { -webkit-text-size-adjust: 100%; }
   body {
     @apply text-ink antialiased;
-    background-color: var(--canvas);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: 1.5;
@@ -20,13 +19,13 @@
   h1, h2, h3, h4 { letter-spacing: -0.015em; }
   /* One modern sans-serif (Poppins) throughout. Titles and big numbers are set in the same family, in heavier weights. */
   h1, h2, .font-display { font-family: var(--font-display); font-variant-numeric: lining-nums tabular-nums; }
-  /* On large screens the app floats as a rounded window over a warm, tinted backdrop. */
-  @media (min-width: 1024px) {
-    body {
-      background-color: var(--backdrop);
-      background-image: radial-gradient(60rem 40rem at 8% 0%, #f9cfae 0%, transparent 60%), radial-gradient(50rem 36rem at 100% 100%, #e7d3ea 0%, transparent 60%);
-      background-attachment: fixed;
-    }
+  /* The backdrop: soft grey with two quiet washes of brand orange, so the frosted glass has something to blur. */
+  body {
+    background-color: var(--backdrop);
+    background-image:
+      radial-gradient(46rem 32rem at 0% 0%, rgb(232 112 48 / 0.28), transparent 62%),
+      radial-gradient(40rem 30rem at 100% 100%, rgb(232 112 48 / 0.16), transparent 62%);
+    background-attachment: fixed;
   }
   :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
   button { cursor: pointer; }
@@ -37,6 +36,19 @@
 }
 
 @layer components {
+  /* FROSTED GLASS: translucent white + blur + a bright hairline. Used for the app frame and every card. */
+  .glass { background: var(--glass-bg); -webkit-backdrop-filter: blur(16px) saturate(1.15); backdrop-filter: blur(16px) saturate(1.15); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); }
+  .glass-strong { background: var(--glass-bg-strong); -webkit-backdrop-filter: blur(20px) saturate(1.2); backdrop-filter: blur(20px) saturate(1.2); border: 1px solid var(--glass-border); }
+  .frame-glass {
+    background:
+      radial-gradient(38rem 26rem at 100% 0%, rgb(232 112 48 / 0.12), transparent 62%),
+      radial-gradient(32rem 24rem at 0% 100%, rgb(232 112 48 / 0.07), transparent 62%),
+      rgb(255 255 255 / 0.58);
+    -webkit-backdrop-filter: blur(28px) saturate(1.2); backdrop-filter: blur(28px) saturate(1.2);
+    border: 1px solid rgb(255 255 255 / 0.85);
+  }
+  @supports not (backdrop-filter: blur(1px)) { .glass { background: rgb(255 255 255 / 0.92); } .glass-strong { background: rgb(255 255 255 / 0.96); } .frame-glass { background: rgb(250 250 251 / 0.96); } }
+
   /* "Skip to content" – first tab stop on every page, for keyboard and screen-reader users */
   .skip-link {
     @apply fixed left-3 top-3 z-[100] -translate-y-20 rounded-md bg-surface px-4 py-2 text-small font-semibold text-ink shadow-lg;

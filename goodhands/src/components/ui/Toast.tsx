@@ -41,17 +41,17 @@ function ToastCard({ item, onDismiss }: { item: ToastItem; onDismiss: () => void
       onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}
       className="pointer-events-auto flex w-full max-w-md items-start gap-3 rounded-lg bg-ink px-4 py-3 text-ink-inverse shadow-lg anim-fade-in"
     >
-      <Icon className={cn('mt-0.5 h-5 w-5 shrink-0', item.tone === 'danger' ? 'text-[#ff9b8f]' : item.tone === 'info' ? 'text-[#9cc8ee]' : 'text-[#8fd6ae]')} aria-hidden />
+      <Icon className={cn('mt-0.5 h-5 w-5 shrink-0', item.tone === 'danger' ? 'text-primary-subtle-hover' : item.tone === 'info' ? 'text-white/70' : 'text-white')} aria-hidden />
       <div className="min-w-0 flex-1">
         <p className="text-small font-semibold">{item.title}</p>
-        {item.description && <p className="text-caption text-[#e8dfd2]">{item.description}</p>}
+        {item.description && <p className="text-caption text-white/75">{item.description}</p>}
       </div>
       {item.action && (
-        <button type="button" onClick={() => { item.action!.onClick(); onDismiss() }} className="min-h-8 rounded-md px-2 text-small font-bold text-[#ffc9a3] underline-offset-2 hover:underline">
+        <button type="button" onClick={() => { item.action!.onClick(); onDismiss() }} className="min-h-8 rounded-md px-2 text-small font-bold text-primary-subtle-hover underline-offset-2 hover:underline">
           {item.action.label}
         </button>
       )}
-      <button type="button" aria-label="Dismiss notification" onClick={onDismiss} className="-mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-[#e8dfd2] hover:bg-white/10">
+      <button type="button" aria-label="Dismiss notification" onClick={onDismiss} className="-mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-white/75 hover:bg-white/10">
         <X className="h-4 w-4" aria-hidden />
       </button>
     </div>

@@ -17,9 +17,9 @@ export function TimelineItem({ state, time, children, last }: { state: TimelineS
         <time className={cn('text-small font-semibold tabular-nums', state === 'done' ? 'text-ink-tertiary' : 'text-ink')}>{time}</time>
       </div>
       <div className="relative flex flex-col items-center">
-        <span aria-hidden className={cn('z-10 mt-3 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 bg-surface transition-colors duration-base',
-          state === 'done' && 'border-success bg-success text-white', state === 'overdue' && 'border-warning bg-warning-bg text-warning-text',
-          state === 'upcoming' && 'border-line-strong', state === 'now' && 'border-primary')}>
+        <span aria-hidden className={cn('z-10 mt-3 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-base',
+          state === 'done' && 'border-ink bg-ink text-white', state === 'overdue' && 'border-warning bg-warning-bg text-warning-text',
+          state === 'upcoming' && 'border-line-strong bg-surface', state === 'now' && 'border-primary bg-surface')}>
           {state === 'done' && <Check className="h-3.5 w-3.5 anim-pop" strokeWidth={3.5} />}
           {state === 'overdue' && <TriangleAlert className="h-3.5 w-3.5" />}
           {state === 'now' && <span className="h-2 w-2 rounded-full bg-primary" />}

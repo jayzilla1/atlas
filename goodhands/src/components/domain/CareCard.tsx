@@ -23,7 +23,7 @@ export function CareCardDrawer({ childId, onClose }: { childId: string; onClose:
     <Drawer open onClose={onClose} title="Care card" description="What you need to care for this child safely.">
       <div className="space-y-6">
         <div className="flex items-center gap-4">
-          <Avatar first={c.firstName} last={c.lastName} tint={c.tint} size="lg" />
+          <Avatar first={c.firstName} last={c.lastName} src={c.photo} size="lg" />
           <div>
             <p className="text-h3">{childName(c)}</p>
             <p className="text-small text-ink-secondary">{fmtAge(c.dob, today, 'long')} · expected {fmtTime(c.schedule.arrival)}–{fmtTime(c.schedule.departure)}</p>

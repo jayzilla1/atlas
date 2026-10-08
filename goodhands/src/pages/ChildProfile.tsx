@@ -56,7 +56,7 @@ function Screen() {
     <>
       <PageHeader
         breadcrumbs={<Breadcrumbs items={[{ label: 'Children', to: '/children' }, { label: childName(c) }]} />}
-        title={<span className="flex items-center gap-4"><Avatar first={c.firstName} last={c.lastName} tint={c.tint} size="lg" />{childName(c)}</span>}
+        title={<span className="flex items-center gap-4"><Avatar first={c.firstName} last={c.lastName} src={c.photo} size="lg" />{childName(c)}</span>}
         description={`${fmtAge(c.dob, now.date, 'long')} · born ${fmtFull(c.dob)}`}
         actions={<><AttendanceBadge view={view} /><Button icon={<Plane className="h-4 w-4" />} onClick={() => dialogs.markAway(c.id, now.date)}>Mark away</Button></>}
       />

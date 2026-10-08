@@ -47,7 +47,7 @@ function Screen() {
     <>
       <PageHeader
         breadcrumbs={<Breadcrumbs items={[{ label: 'Employees', to: '/employees' }, { label: employeeName(e) }]} />}
-        title={<span className="flex items-center gap-4"><Avatar first={e.firstName} last={e.lastName} tint={e.tint} size="lg" />{employeeName(e)}</span>}
+        title={<span className="flex items-center gap-4"><Avatar first={e.firstName} last={e.lastName} src={e.photo} size="lg" />{employeeName(e)}</span>}
         description={`${e.role} · hired ${fmtFull(e.hiredOn)}`}
         actions={<ShiftBadge state={shiftState(d, e.id, now.date)} />}
       />

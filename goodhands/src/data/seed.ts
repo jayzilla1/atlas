@@ -149,7 +149,7 @@ for (let week = '2026-08-03'; week <= mondayOf(DEMO_TODAY); week = addDays(week,
     if (shouldBePaid) {
       p.paidOn = addDays(dueDate, c.id === 'leo' && week === '2026-08-24' ? 3 : between(-1, 0))
       if (p.paidOn > DEMO_TODAY) p.paidOn = DEMO_TODAY
-      p.method = (['zelle', 'check', 'cash', 'card'] as const)[c.tint % 4]
+      p.method = (['zelle', 'check', 'cash', 'card'] as const)[(c.tint ?? 0) % 4]
     }
     payments.push(p)
   }
@@ -275,7 +275,7 @@ for (const c of children) {
   const n = c.firstName
   documents.push(
     doc({ title: `${n} — Enrollment Contract`, category: 'contract', ownerType: 'child', ownerId: c.id, fileType: 'pdf', sizeKb: 320, uploadedOn: c.enrolledOn, sensitive: false }),
-    doc({ title: `${n} — Health Form`, category: 'health', ownerType: 'child', ownerId: c.id, fileType: 'pdf', sizeKb: 210, uploadedOn: addDays(c.enrolledOn, 3), expiresOn: c.id === 'ethan' ? '2026-09-30' : c.id === 'priya' ? '2027-02-11' : '2027-0' + (3 + (c.tint % 5)) + '-15', sensitive: true }),
+    doc({ title: `${n} — Health Form`, category: 'health', ownerType: 'child', ownerId: c.id, fileType: 'pdf', sizeKb: 210, uploadedOn: addDays(c.enrolledOn, 3), expiresOn: c.id === 'ethan' ? '2026-09-30' : c.id === 'priya' ? '2027-02-11' : '2027-0' + (3 + ((c.tint ?? 0) % 5)) + '-15', sensitive: true }),
     c.id === 'ethan'
       ? doc({ title: `${n} — Emergency Contact Form`, category: 'emergency', ownerType: 'child', ownerId: c.id, fileType: 'pdf', sizeKb: 0, missing: true, sensitive: false })
       : doc({ title: `${n} — Emergency Contact Form`, category: 'emergency', ownerType: 'child', ownerId: c.id, fileType: 'pdf', sizeKb: 140, uploadedOn: addDays(c.enrolledOn, 3), sensitive: false }),
@@ -292,7 +292,7 @@ for (const e of employees) {
   const n = e.firstName
   documents.push(
     doc({ title: `${n} — W-2 (2025)`, category: 'w2', ownerType: 'employee', ownerId: e.id, fileType: 'pdf', sizeKb: 150, uploadedOn: '2026-01-29', sensitive: true, missing: e.id === 'marcus' }),
-    doc({ title: `${n} — Driver’s License`, category: 'license', ownerType: 'employee', ownerId: e.id, fileType: 'jpg', sizeKb: 1100, uploadedOn: e.hiredOn, expiresOn: e.id === 'taylor' ? '2026-11-02' : '2029-06-1' + (e.tint % 9), sensitive: true }),
+    doc({ title: `${n} — Driver’s License`, category: 'license', ownerType: 'employee', ownerId: e.id, fileType: 'jpg', sizeKb: 1100, uploadedOn: e.hiredOn, expiresOn: e.id === 'taylor' ? '2026-11-02' : '2029-06-1' + ((e.tint ?? 0) % 9), sensitive: true }),
     doc({ title: `${n} — Employment Agreement`, category: 'employment', ownerType: 'employee', ownerId: e.id, fileType: 'pdf', sizeKb: 410, uploadedOn: e.hiredOn, sensitive: true }),
     doc({ title: `${n} — CPR & First Aid Certificate`, category: 'employment', ownerType: 'employee', ownerId: e.id, fileType: 'pdf', sizeKb: 260, uploadedOn: '2025-10-28', expiresOn: e.id === 'taylor' ? '2026-10-28' : '2027-10-28', sensitive: false }),
   )

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AlertTriangle, Bell, Info, MoreHorizontal, Plus, Trash2 } from 'lucide-react'
+import { AlertTriangle, Bell, CircleAlert, CircleCheck, Clock, Info, MoreHorizontal, Plus, Trash2 } from 'lucide-react'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { Card } from '@/components/ui/Card'
 import { Button, IconButton } from '@/components/ui/Button'
@@ -27,15 +27,14 @@ import { contrast, cssVarHex } from '@/utils/contrast'
 import { useSession } from '@/state/session'
 
 const COLORS: Array<[string, string, string]> = [
-  ['primary', '--primary', 'Brand and the main action'], ['primary-hover', '--primary-hover', 'Hover/pressed'], ['primary-subtle', '--primary-subtle', 'Soft highlight'], ['primary-text', '--primary-text', 'Orange used as text'],
-  ['canvas', '--canvas', 'Page background (warm cream)'], ['surface', '--surface', 'Cards and panels'], ['surface-sunken', '--surface-sunken', 'Wells, hovers'],
-  ['text-primary', '--text-primary', 'Charcoal body text'], ['text-secondary', '--text-secondary', 'Supporting text'], ['text-tertiary', '--text-tertiary', 'Hints'],
-  ['success', '--success', 'Positive'], ['warning', '--warning', 'Needs attention'], ['danger', '--danger', 'Urgent / error'], ['info', '--info', 'Informational'],
+  ['primary', '--primary', 'The brand. Buttons, active nav, focus of attention'], ['primary-hover', '--primary-hover', 'Hover and pressed'], ['primary-subtle', '--primary-subtle', 'Soft orange: needs attention soon'], ['primary-text', '--primary-text', 'Orange used as text'],
+  ['backdrop', '--backdrop', 'Soft grey behind the glass frame'], ['canvas', '--canvas', 'Page background where there is no frame'], ['surface', '--surface', 'Opaque white: dialogs, inputs, menus'], ['surface-sunken', '--surface-sunken', 'Wells, quiet chips'],
+  ['text-primary', '--text-primary', 'Charcoal body text'], ['text-secondary', '--text-secondary', 'Supporting text'], ['text-tertiary', '--text-tertiary', 'Hints and meta'], ['border-strong', '--border-strong', 'Input and control edges'],
 ]
 const PAIRS: Array<[string, string, string, number]> = [
   ['Body text on canvas', '--text-primary', '--canvas', 4.5], ['Secondary text on surface', '--text-secondary', '--surface', 4.5], ['Tertiary text on surface', '--text-tertiary', '--surface', 4.5],
   ['White on primary (buttons)', '--on-primary', '--primary', 4.5], ['Primary text on soft orange', '--primary-text', '--primary-subtle', 4.5],
-  ['Success text on success bg', '--success-text', '--success-bg', 4.5], ['Warning text on warning bg', '--warning-text', '--warning-bg', 4.5], ['Danger text on danger bg', '--danger-text', '--danger-bg', 4.5], ['Info text on info bg', '--info-text', '--info-bg', 4.5],
+  ['Quiet chip (success / neutral)', '--success-text', '--success-bg', 4.5], ['Soft-orange chip (warning)', '--warning-text', '--warning-bg', 4.5], ['Orange text on danger tint', '--danger-text', '--danger-bg', 4.5], ['Outline chip (info)', '--info-text', '--surface', 4.5],
   ['Input border on surface (UI)', '--border-strong', '--surface', 3], ['Focus ring on canvas (UI)', '--focus-ring', '--canvas', 3],
 ]
 const TYPE = [['Display', 'text-display', '40 / 700', 'Big numbers: 8'], ['H1', 'text-h1', '30 / 700', 'Page title'], ['H2', 'text-h2', '24 / 700', 'Section title'], ['H3', 'text-h3', '20 / 650', 'Card heading'], ['Lead', 'text-lead', '18 / 400', 'Intro paragraph'], ['Body', 'text-body', '16 / 400', 'Default reading text'], ['Small', 'text-small', '14 / 400', 'Tables and secondary'], ['Caption', 'text-caption', '12 / 400', 'Labels and meta']]
@@ -57,7 +56,14 @@ export default function DesignSystem() {
 
       <Block id="foundations" title="Foundations">
         <Sub title="Brand">
-          <Card className="flex flex-wrap items-center gap-8"><Wordmark size="lg" /><LogoMark size={56} /><p className="max-w-md text-small text-ink-secondary">A child held by two cupped hands. Warm, steady and professional — no cartoon characters or primary-colour overload. Orange is the brand and action colour only; most of the interface is calm cream, white and charcoal.</p></Card>
+          <Card className="flex flex-wrap items-center gap-8"><Wordmark size="lg" /><LogoMark size={56} /><p className="max-w-md text-small text-ink-secondary">A child held by two cupped hands. Warm, steady and professional — no cartoon characters or primary-colour overload. Orange is the only brand colour; everything else is white, glass and grey, so orange always means ‘look here’.</p></Card>
+        </Sub>
+        <Sub title="Colour principle: one hue" note="GoodHands uses a single brand colour (orange) plus neutral greys. Status is shown by intensity, not by a rainbow — quiet grey means fine, soft orange means look at this, solid orange means act now. Every status also has an icon and a word.">
+          <Card className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <span className="flex items-center gap-2"><Badge tone="success" icon={<CircleCheck />}>Present · Paid · Good</Badge><span className="text-caption text-ink-secondary">quiet grey = all fine</span></span>
+            <span className="flex items-center gap-2"><Badge tone="warning" icon={<Clock />}>Late · Due · Running low</Badge><span className="text-caption text-ink-secondary">soft orange = soon</span></span>
+            <span className="flex items-center gap-2"><Badge tone="danger" icon={<CircleAlert />}>Overdue · Out · Missing</Badge><span className="text-caption text-ink-secondary">solid orange = now</span></span>
+          </Card>
         </Sub>
         <Sub title="Colour — semantic tokens" note="Components never use raw colours; they use names for what a colour means. Change a token and the whole product follows.">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -74,7 +80,7 @@ export default function DesignSystem() {
         <div className="grid gap-8 lg:grid-cols-3">
           <Sub title="Spacing (4px base)"><Card className="space-y-1.5">{[1, 2, 3, 4, 6, 8, 12].map((n) => <div key={n} className="flex items-center gap-3 text-caption"><span className="w-14 font-mono text-ink-secondary">space-{n}</span><span className="h-3 rounded-sm bg-primary" style={{ width: `calc(var(--space-${n}))` }} /><span className="text-ink-tertiary">{n * 4}px</span></div>)}</Card></Sub>
           <Sub title="Radius"><Card className="flex flex-wrap gap-3">{[['sm', '6'], ['md', '8'], ['lg', '12'], ['full', '999']].map(([n, px]) => <div key={n} className="text-center text-caption"><div className="mb-1 h-14 w-14 border-2 border-primary bg-primary-subtle" style={{ borderRadius: `var(--radius-${n})` }} />{n}<br /><span className="text-ink-tertiary">{px}px</span></div>)}</Card></Sub>
-          <Sub title="Elevation"><Card className="flex flex-wrap gap-4 bg-canvas">{['sm', 'md', 'lg'].map((n) => <div key={n} className="flex h-14 w-16 items-center justify-center rounded-lg bg-surface text-caption" style={{ boxShadow: `var(--shadow-${n})` }}>{n}</div>)}</Card></Sub>
+          <Sub title="Elevation & glass"><Card className="flex flex-wrap gap-4">{['sm', 'md', 'lg'].map((n) => <div key={n} className="flex h-14 w-16 items-center justify-center rounded-lg bg-surface text-caption" style={{ boxShadow: `var(--shadow-${n})` }}>{n}</div>)}</Card></Sub>
         </div>
         <Sub title="Motion" note="Short and purposeful. All durations read tokens, so ‘reduce motion’ in the operating system turns them to zero."><Card className="flex flex-wrap gap-6 text-small">{[['fast', '120ms', 'hover, press'], ['base', '200ms', 'status change, fade'], ['slow', '320ms', 'progress, drawers']].map(([n, ms, use]) => <div key={n}><p className="font-semibold">motion-{n} <span className="font-normal text-ink-secondary">{ms}</span></p><p className="text-caption text-ink-secondary">{use}</p></div>)}</Card></Sub>
       </Block>
@@ -113,7 +119,7 @@ export default function DesignSystem() {
         <Sub title="Table, pagination, metric, progress, calendar"><div className="grid gap-6 lg:grid-cols-[1fr_20rem]"><div className="space-y-5">
           <Card padded={false}><Table caption="Example table"><THead><TR><TH>Child</TH><TH>Status</TH><TH align="right">Amount</TH></TR></THead><tbody><TR><TD>Amari</TD><TD><PaymentBadge status="paid" /></TD><TD align="right">$250</TD></TR><TR><TD>Maya</TD><TD><PaymentBadge status="due" /></TD><TD align="right">$250</TD></TR></tbody></Table></Card>
           <Pagination page={page} pageSize={8} total={23} onPage={setPage} noun="children" />
-          <div className="flex gap-6"><Metric label="Present" value={6} tone="success" /><Metric label="Not arrived" value={1} tone="warning" /></div>
+          <div className="flex gap-6"><Metric label="Present" value={6} /><Metric label="Not arrived" value={1} tone="warning" /></div>
           <Progress value={4} max={9} label="Tasks" /></div><Card><Calendar value={date} onChange={setDate} today={today} /></Card></div></Sub>
       </Block>
 

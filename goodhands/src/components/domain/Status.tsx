@@ -24,7 +24,7 @@ export function AttendanceBadge({ view, size }: { view: AttendanceView; size?: '
     case 'expected': tone = 'info'; icon = <Hourglass className={i} />; label = 'Expected'; break
     case 'present': tone = 'success'; icon = <UserCheck className={i} />; label = 'Present'; break
     case 'late': tone = 'warning'; icon = <Clock3 className={i} />; label = `Late · ${durationLabel(view.lateMinutes ?? 0)}`; break
-    case 'absent': tone = 'danger'; icon = <UserX className={i} />; label = view.absence ? (view.absence.kind === 'sick' ? 'Absent · Sick' : view.absence.kind === 'other' ? 'Absent · Other' : 'Absent') : 'Absent'; break
+    case 'absent': tone = 'neutral'; icon = <UserX className={i} />; label = view.absence ? (view.absence.kind === 'sick' ? 'Absent · Sick' : view.absence.kind === 'other' ? 'Absent · Other' : 'Absent') : 'Absent'; break
     case 'vacation': tone = 'neutral'; icon = <Plane className={i} />; label = 'Vacation'; break
     case 'checked_out': tone = 'neutral'; icon = <LogOut className={i} />; label = 'Checked out'; break
     case 'not_scheduled': tone = 'neutral'; icon = <Ban className={i} />; label = 'Not scheduled'; break

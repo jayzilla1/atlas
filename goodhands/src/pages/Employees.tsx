@@ -31,7 +31,7 @@ function Screen() {
             return (
               <Card key={e.id} className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <Avatar first={e.firstName} last={e.lastName} tint={e.tint} />
+                  <Avatar first={e.firstName} last={e.lastName} src={e.photo} />
                   <div className="min-w-0 flex-1"><Link to={`/employees/${e.id}`} className="font-semibold underline-offset-2 hover:underline">{employeeName(e)}</Link><p className="text-caption text-ink-secondary">{e.role} · {fmtTime(shiftOn(d, e.id, now.date)?.start)}–{fmtTime(shiftOn(d, e.id, now.date)?.end)}</p></div>
                   <ShiftBadge state={st} />
                 </div>
@@ -51,7 +51,7 @@ function Screen() {
             <THead><TR><TH>Name</TH><TH>Role</TH><TH>Usual days</TH><TH>Hired</TH><TH><span className="sr-only">Open</span></TH></TR></THead>
             <tbody>{d.employees.map((e) => (
               <TR key={e.id} className="hover:bg-surface-muted">
-                <TD><Link to={`/employees/${e.id}`} className="group flex items-center gap-3 rounded"><Avatar first={e.firstName} last={e.lastName} tint={e.tint} size="sm" /><span className="font-semibold group-hover:underline">{employeeName(e)}</span></Link></TD>
+                <TD><Link to={`/employees/${e.id}`} className="group flex items-center gap-3 rounded"><Avatar first={e.firstName} last={e.lastName} src={e.photo} size="sm" /><span className="font-semibold group-hover:underline">{employeeName(e)}</span></Link></TD>
                 <TD>{e.role}</TD>
                 <TD>{Object.keys(e.weekly).map((k) => WEEKDAYS_SHORT[+k]).join(', ')}</TD>
                 <TD className="whitespace-nowrap">{fmtFull(e.hiredOn)}</TD>

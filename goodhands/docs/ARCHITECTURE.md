@@ -42,8 +42,14 @@ Phones/tablets use a bottom bar (4 key destinations + More for the owner; all 5 
 - **Pages are lazy-loaded** (downloaded when opened).
 - `useSimulatedLoad` fakes network waits so loading/error states can be designed; Demo controls force the error.
 
-## 7. Design tokens
-Two layers (`styles/tokens.css`): *primitives* (raw palette) → *semantic* (`primary`, `surface`, `text-secondary`, `success|warning|danger|info` each with strong / text / bg). Tailwind only maps to semantic tokens. Orange (#B8470A) is the brand/action colour only; cream canvas, white surfaces, charcoal text. Spacing 4px base; modest radii (6/8/12); elevation mostly borders; motion tokens collapse to 0 under *reduce motion*. `npm run check:contrast` and the Design System page verify AA numerically.
+## 7. Design tokens & visual language
+Two layers (`styles/tokens.css`): *primitives* (raw palette) → *semantic* (`primary`, `surface`, `text-secondary`, `success|warning|danger|info` each with strong / text / bg). Tailwind only maps to semantic tokens.
+
+**One hue.** The palette is a single brand orange (#B8470A) plus a neutral grey scale. Status is expressed by *intensity*, not a rainbow: quiet grey = fine (Present, Paid, Good), soft orange = soon (Late, Due, Running low), solid orange = now (Overdue, Out, Missing). Every status also carries an icon and a word. Because orange is scarce, it always means "look here".
+
+**Glass.** A soft grey backdrop with faint orange washes sits behind a frosted-glass app frame (`.frame-glass`); cards are translucent white with a bright hairline (`.glass`); dialogs, menus and inputs stay opaque for legibility. Avatars are neutral white bubbles with grey initials (a photo can be set per record).
+
+Typography: Poppins throughout (regular/medium to read, semibold/bold for titles and numbers). Spacing 4px base; radii 8/12/20/28; motion tokens collapse to 0 under *reduce motion*. `npm run check:contrast` and the Design System page verify AA numerically.
 
 ## 8. Accessibility (WCAG 2.2 AA target)
 Skip link; route-change focus + titles; native `<dialog>` for modals/drawers (focus trap, Esc, inert background); APG patterns for tabs, menus, calendar; visible 3px focus ring; labelled fields with hint/error wiring; table captions + `scope`; status = colour + icon + text; 44px touch targets on touch devices; reduced-motion honoured (including the assistant's streaming); live regions for toasts and counts.
