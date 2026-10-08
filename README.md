@@ -54,3 +54,9 @@ src/state/                store (tasks, risks, reviews, activity) + role permiss
 * **Frozen date** (7 Oct 2026) so "expires in 12 days" never rots.
 
 Dependencies: React, React Router, Lucide icons, Inter (self-hosted via Fontsource), Tailwind CSS. Charts are hand-built SVG.
+
+---
+
+## GoodHands
+
+This repository also contains **GoodHands**, a childcare-operations prototype, in [`goodhands/`](goodhands/README.md) (separate app; run it from that folder).

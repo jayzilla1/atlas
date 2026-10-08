@@ -1,0 +1,47 @@
+@import '@fontsource-variable/figtree';
+@import './tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    font-feature-settings: 'tnum' 1; /* tabular numbers: times and money line up in columns */
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.01em; }
+  :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
+  button { cursor: pointer; }
+  button:disabled, [aria-disabled='true'] { cursor: not-allowed; }
+  dialog { padding: 0; border: 0; background: transparent; color: inherit; max-width: none; max-height: none; }
+  dialog::backdrop { background: var(--overlay-scrim); }
+  ::selection { background: var(--primary-subtle-hover); }
+}
+
+@layer components {
+  /* "Skip to content" – first tab stop on every page, for keyboard and screen-reader users */
+  .skip-link {
+    @apply fixed left-3 top-3 z-[100] -translate-y-20 rounded-md bg-surface px-4 py-2 text-small font-semibold text-ink shadow-lg;
+    transition: transform var(--motion-fast) var(--ease-out);
+  }
+  .skip-link:focus { @apply translate-y-0; }
+  .sr-only-live { @apply sr-only; }
+}
+
+@layer utilities {
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .text-balance { text-wrap: balance; }
+}
+
+@keyframes gh-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes gh-slide-in-right { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes gh-slide-up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes gh-pop { 0% { transform: scale(0.85); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@keyframes gh-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes gh-pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+.anim-fade-in { animation: gh-fade-in var(--motion-base) var(--ease-out) both; }
+.anim-pop { animation: gh-pop var(--motion-base) var(--ease-out); }

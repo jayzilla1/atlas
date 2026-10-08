@@ -1,0 +1,144 @@
+/*
+ * GOODHANDS DESIGN TOKENS
+ * -----------------------------------------------------------------------------
+ * Two layers, on purpose:
+ *   1. PRIMITIVES  – the raw palette ("orange-700"). Nothing in the UI uses these directly.
+ *   2. SEMANTIC    – what a colour *means* ("primary", "warning", "surface").
+ *                    Every component only references semantic tokens.
+ * To re-theme the product (a dark mode, or another provider's brand colour) you change
+ * the semantic layer. No component needs to be touched.
+ */
+
+:root {
+  /* ===== 1. PRIMITIVES ===================================================== */
+  --p-orange-50: #fff6ee;
+  --p-orange-100: #fdebdd;
+  --p-orange-200: #f9d2b2;
+  --p-orange-400: #ee8a3c;
+  --p-orange-600: #b8470a;
+  --p-orange-700: #9a3a06;
+  --p-orange-800: #a83f06;
+  --p-cream-50: #fdfbf7;
+  --p-cream-100: #fbf7f0;
+  --p-cream-200: #f3ede3;
+  --p-cream-300: #e8dfd2;
+  --p-stone-100: #efe9e1;
+  --p-stone-400: #b9afa3;
+  --p-stone-500: #8c8175;
+  --p-stone-600: #6f655c;
+  --p-stone-700: #5c534b;
+  --p-stone-800: #4a423b;
+  --p-charcoal: #2a2420;
+  --p-green-100: #e3f1e8;
+  --p-green-500: #2e7d55;
+  --p-green-700: #1f5c3f;
+  --p-amber-100: #fff0cc;
+  --p-amber-500: #b26b00;
+  --p-amber-700: #7a4f00;
+  --p-red-100: #fce6e3;
+  --p-red-500: #c42b1c;
+  --p-red-700: #a52114;
+  --p-blue-100: #e3eef8;
+  --p-blue-500: #2f6fa8;
+  --p-blue-700: #1f5483;
+  --p-focus: #1d4ed8;
+
+  /* ===== 2. SEMANTIC COLOUR ================================================ */
+  /* brand / action */
+  --primary: var(--p-orange-600);
+  --primary-hover: var(--p-orange-700);
+  --primary-subtle: var(--p-orange-100);
+  --primary-subtle-hover: var(--p-orange-200);
+  --primary-text: var(--p-orange-800);
+  --on-primary: #ffffff;
+  /* surfaces */
+  --canvas: var(--p-cream-100);
+  --surface: #ffffff;
+  --surface-muted: var(--p-cream-50);
+  --surface-sunken: var(--p-cream-200);
+  --surface-hover: var(--p-cream-100);
+  --overlay-scrim: rgb(42 36 32 / 0.45);
+  /* text */
+  --text-primary: var(--p-charcoal);
+  --text-secondary: var(--p-stone-700);
+  --text-tertiary: var(--p-stone-600);
+  --text-inverse: #ffffff;
+  /* borders */
+  --border: var(--p-cream-300);
+  --border-subtle: var(--p-cream-200);
+  --border-strong: var(--p-stone-500);
+  /* status – every status has a strong colour for icons, a text colour and a soft background */
+  --success: var(--p-green-500);
+  --success-text: var(--p-green-700);
+  --success-bg: var(--p-green-100);
+  --warning: var(--p-amber-500);
+  --warning-text: var(--p-amber-700);
+  --warning-bg: var(--p-amber-100);
+  --danger: var(--p-red-500);
+  --danger-text: var(--p-red-700);
+  --danger-bg: var(--p-red-100);
+  --info: var(--p-blue-500);
+  --info-text: var(--p-blue-700);
+  --info-bg: var(--p-blue-100);
+  --neutral: var(--p-stone-600);
+  --neutral-text: var(--p-stone-800);
+  --neutral-bg: var(--p-stone-100);
+  --focus-ring: var(--p-focus);
+
+  /* ===== TYPOGRAPHY ======================================================== */
+  --font-sans: 'Figtree Variable', 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* size / line-height pairs. rem so users' browser text-size settings are respected */
+  --text-caption: 0.75rem;     /* 12 – labels, meta */
+  --text-small: 0.875rem;      /* 14 – table cells, secondary */
+  --text-body: 1rem;           /* 16 – default */
+  --text-lead: 1.125rem;       /* 18 */
+  --text-h3: 1.25rem;          /* 20 */
+  --text-h2: 1.5rem;           /* 24 */
+  --text-h1: 1.875rem;         /* 30 */
+  --text-display: 2.5rem;      /* 40 – the big numbers */
+
+  /* ===== SPACING (4px base) =============================================== */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ===== RADIUS – deliberately modest; no pill-everything look ============ */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
+
+  /* ===== ELEVATION – borders do most of the work, shadows are quiet ======= */
+  --shadow-sm: 0 1px 2px rgb(42 36 32 / 0.06);
+  --shadow-md: 0 4px 12px rgb(42 36 32 / 0.08);
+  --shadow-lg: 0 12px 32px rgb(42 36 32 / 0.14);
+
+  /* ===== MOTION =========================================================== */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 320ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* ===== LAYOUT =========================================================== */
+  --sidebar-width: 15rem;
+  --content-max: 76rem;
+  --bottom-nav-height: 4rem;
+  --control-height: 2.5rem;
+}
+
+@media (pointer: coarse) {
+  :root { --control-height: 2.75rem; } /* 44px minimum touch target on touch devices */
+}
+
+/* Reduced motion: every transition/animation in the product reads these tokens. */
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-fast: 0ms; --motion-base: 0ms; --motion-slow: 0ms; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
